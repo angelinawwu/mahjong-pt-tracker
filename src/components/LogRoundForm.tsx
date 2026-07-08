@@ -76,12 +76,44 @@ export function LogRoundForm({
   }
 
   function toggleCombo(id: string) {
-    setSelection((prev) => ({
-      ...prev,
-      comboIds: prev.comboIds.includes(id)
+    setSelection((prev) => {
+      const combo = COMBOS.find((c) => c.id === id);
+      const isHandType = combo?.category === "hand" || !combo?.category;
+
+      let newCombos = prev.comboIds.includes(id)
         ? prev.comboIds.filter((c) => c !== id)
-        : [...prev.comboIds, id],
-    }));
+        : [...prev.comboIds, id];
+        
+      if (!prev.comboIds.includes(id)) {
+        if (id === "no-flower") {
+          newCombos = newCombos.filter((c) => c !== "own-flower");
+        }
+        if (isHandType) {
+          newCombos = newCombos.filter((c) => {
+            if (c === id) return true;
+            const otherCombo = COMBOS.find((oc) => oc.id === c);
+            const otherIsHandType = otherCombo?.category === "hand" || !otherCombo?.category;
+            return !otherIsHandType;
+          });
+        }
+      }
+      
+      return { ...prev, comboIds: newCombos };
+    });
+  }
+
+  function setComboCount(id: string, count: number) {
+    setSelection((prev) => {
+      let otherCombos = prev.comboIds.filter((c) => c !== id);
+      if (id === "own-flower" && count > 0) {
+        otherCombos = otherCombos.filter((c) => c !== "no-flower");
+      }
+      const newCombos = [...otherCombos, ...Array(count).fill(id)];
+      return {
+        ...prev,
+        comboIds: newCombos
+      };
+    });
   }
 
   function setWinType(winType: WinType) {
@@ -133,10 +165,152 @@ export function LogRoundForm({
       </section>
 
       <section>
-        <p className="mb-2 text-sm font-medium text-ink/70">Combos</p>
-        <div className="flex flex-col gap-2">
-          {COMBOS.map((combo) => {
+        <p className="mb-2 text-sm font-medium text-ink/70">Hand Types</p>
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {COMBOS.filter((c) => c.category === "hand" || !c.category).map((combo) => {
             const checked = selection.comboIds.includes(combo.id);
+            return (
+              <button
+                type="button"
+                key={combo.id}
+                onClick={() => toggleCombo(combo.id)}
+                className={`hover-transition flex items-center justify-between rounded-xl border px-4 py-3 text-left ${
+                  checked
+                    ? "border-jade bg-jade-soft/60"
+                    : "border-ink/10 bg-white/60 hover:border-ink/25"
+                }`}
+              >
+                <span className="text-sm text-ink">
+                  <span className="font-medium">{combo.name}</span>
+                  <span className="ml-2 text-ink/40">{combo.chineseName}</span>
+                </span>
+                <span className="font-display text-base text-jade">
+                  +{combo.value}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      <section>
+        <p className="mb-2 text-sm font-medium text-ink/70">Modifiers</p>
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {COMBOS.filter((c) => c.category === "modifier").map((combo) => {
+            const count = selection.comboIds.filter((id) => id === combo.id).length;
+            const checked = count > 0;
+            
+            if (combo.maxCount && combo.maxCount > 1) {
+              return (
+                <div
+                  key={combo.id}
+                  className={`flex items-center justify-between rounded-xl border px-4 py-3 text-left transition-colors ${
+                    checked
+                      ? "border-jade bg-jade-soft/60"
+                      : "border-ink/10 bg-white/60"
+                  }`}
+                >
+                  <span className="text-sm text-ink">
+                    <span className="font-medium">{combo.name}</span>
+                    <span className="ml-2 text-ink/40">{combo.chineseName}</span>
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-display text-base text-jade">
+                      +{combo.value * count}
+                    </span>
+                    <div className="flex items-center gap-1 rounded-lg border border-ink/10 bg-white p-1">
+                      <button
+                        type="button"
+                        onClick={() => setComboCount(combo.id, Math.max(0, count - 1))}
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-ink hover:bg-ink/10 active:scale-95"
+                      >
+                        -
+                      </button>
+                      <span className="w-4 text-center text-sm font-medium">{count}</span>
+                      <button
+                        type="button"
+                        onClick={() => setComboCount(combo.id, Math.min(combo.maxCount!, count + 1))}
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-ink hover:bg-ink/10 active:scale-95"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <button
+                type="button"
+                key={combo.id}
+                onClick={() => toggleCombo(combo.id)}
+                className={`hover-transition flex items-center justify-between rounded-xl border px-4 py-3 text-left ${
+                  checked
+                    ? "border-jade bg-jade-soft/60"
+                    : "border-ink/10 bg-white/60 hover:border-ink/25"
+                }`}
+              >
+                <span className="text-sm text-ink">
+                  <span className="font-medium">{combo.name}</span>
+                  <span className="ml-2 text-ink/40">{combo.chineseName}</span>
+                </span>
+                <span className="font-display text-base text-jade">
+                  +{combo.value}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      <section>
+        <p className="mb-2 text-sm font-medium text-ink/70">Flowers</p>
+        <div className="flex flex-col gap-2">
+          {COMBOS.filter((c) => c.category === "flower").map((combo) => {
+            const count = selection.comboIds.filter((id) => id === combo.id).length;
+            const checked = count > 0;
+            
+            if (combo.maxCount && combo.maxCount > 1) {
+              return (
+                <div
+                  key={combo.id}
+                  className={`flex items-center justify-between rounded-xl border px-4 py-3 text-left transition-colors ${
+                    checked
+                      ? "border-jade bg-jade-soft/60"
+                      : "border-ink/10 bg-white/60"
+                  }`}
+                >
+                  <span className="text-sm text-ink">
+                    <span className="font-medium">{combo.name}</span>
+                    <span className="ml-2 text-ink/40">{combo.chineseName}</span>
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <span className="font-display text-base text-jade">
+                      +{combo.value * count}
+                    </span>
+                    <div className="flex items-center gap-1 rounded-lg border border-ink/10 bg-white p-1">
+                      <button
+                        type="button"
+                        onClick={() => setComboCount(combo.id, Math.max(0, count - 1))}
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-ink hover:bg-ink/10 active:scale-95"
+                      >
+                        -
+                      </button>
+                      <span className="w-4 text-center text-sm font-medium">{count}</span>
+                      <button
+                        type="button"
+                        onClick={() => setComboCount(combo.id, Math.min(combo.maxCount!, count + 1))}
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-ink hover:bg-ink/10 active:scale-95"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
             return (
               <button
                 type="button"

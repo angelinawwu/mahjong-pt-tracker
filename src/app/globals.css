@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --ivory: #f5efdf;
-  --ivory-deep: #ece2c9;
+  --ivory: #fafaf9;
+  --ivory-deep: #f0edea;
   --ink: #1f2a24;
   --jade: #0f3d33;
   --jade-deep: #0a2b24;

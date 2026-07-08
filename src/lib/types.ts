@@ -8,6 +8,8 @@ export interface Combo {
   name: string; // e.g. "All triplets"
   chineseName: string; // e.g. "碰碰胡"
   value: number; // base point value V for this combo
+  category?: "hand" | "modifier" | "flower";
+  maxCount?: number; // max number of times this combo can be applied in one round
 }
 
 export type WinType = "discard" | "selfDraw";
