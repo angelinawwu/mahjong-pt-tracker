@@ -4,13 +4,14 @@
   --ivory: #fafaf9;
   --ivory-deep: #f0edea;
   --ink: #1f2a24;
-  --jade: #0f3d33;
-  --jade-deep: #0a2b24;
+  --jade: #0c5f32;
+  --jade-deep: #084a27;
   --jade-soft: #dce9e2;
-  --lacquer: #a8291f;
-  --lacquer-deep: #7e1d16;
+  --lacquer: #cd2b1f;
+  --lacquer-deep: #a32218;
   --gold: #b9902f;
   --gold-soft: #f0dfab;
+  --accent-blue: #0149f3;
 
   --background: var(--ivory);
   --foreground: var(--ink);
@@ -29,6 +30,7 @@
   --color-lacquer-deep: var(--lacquer-deep);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
+  --color-accent-blue: var(--accent-blue);
   --font-display: var(--font-display);
   --font-body: var(--font-body);
 }

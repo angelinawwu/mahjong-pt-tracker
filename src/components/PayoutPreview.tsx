@@ -10,7 +10,7 @@ interface PayoutPreviewProps {
 
 export function PayoutPreview({ players, deltas, winnerId }: PayoutPreviewProps) {
   return (
-    <div className="rounded-2xl border border-jade/15 bg-white/70 p-5">
+    <div className="border border-ink/15 bg-white/70 p-[21px]">
       <p className="font-display text-lg text-jade">Payout preview</p>
       <p className="mt-1 text-xs tracking-wide text-ink/50 uppercase">
         Updates as you choose
@@ -22,25 +22,23 @@ export function PayoutPreview({ players, deltas, winnerId }: PayoutPreviewProps)
           return (
             <div
               key={player.id}
-              className={`flex items-center justify-between rounded-xl px-4 py-3 transition-colors duration-200 ${
-                isWinner ? "bg-gold-soft/60" : "bg-jade-soft/50"
+              className={`flex items-center justify-between border px-[17px] py-[13px] transition-colors duration-200 ${
+                isWinner ? "border-jade bg-jade/10" : "border-lacquer bg-lacquer/10"
               }`}
             >
-              <span className="text-sm font-medium text-ink">
+              <span
+                className={`text-sm font-medium ${isWinner ? "text-jade" : "text-lacquer"}`}
+              >
                 {player.name}
                 {isWinner && (
-                  <span className="ml-2 text-xs font-semibold text-gold">
+                  <span className="ml-2 text-xs font-medium text-ink/40">
                     winner
                   </span>
                 )}
               </span>
               <span
-                className={`font-display text-lg tabular-nums ${
-                  isWinner
-                    ? "text-gold"
-                    : delta > 0
-                    ? "text-lacquer"
-                    : "text-ink/40"
+                className={`font-display text-base tabular-nums ${
+                  isWinner ? "text-jade" : "text-lacquer"
                 }`}
               >
                 {deltas === null ? "—" : isWinner ? "0" : `+${delta}`}

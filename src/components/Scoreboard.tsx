@@ -33,7 +33,7 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
             return (
               <div
                 key={entry.player.id}
-                className={`hover-transition flex items-center justify-between rounded-xl border px-4 py-3.5 ${
+                className={`hover-transition flex items-center justify-between border px-4 py-3.5 ${
                   isFirst
                     ? "border-gold bg-gold-soft/70 shadow-[0_4px_16px_rgba(185,144,47,0.25)]"
                     : "border-ink/10 bg-white/60"
@@ -72,7 +72,7 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
           <p className="text-sm text-ink/40">No rounds logged yet.</p>
         ) : (
           <>
-            <div className="hidden overflow-hidden rounded-xl border border-ink/10 md:block">
+            <div className="hidden overflow-hidden border border-ink/10 md:block">
               <table className="w-full text-left text-sm">
                 <thead className="bg-jade-soft/60 text-ink/60">
                   <tr>
@@ -122,7 +122,7 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
               {rounds.map((round) => (
                 <div
                   key={round.id}
-                  className="rounded-xl border border-ink/10 bg-white/60 px-4 py-3"
+                  className="border border-ink/10 bg-white/60 px-4 py-3"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-semibold tracking-wide text-lacquer uppercase">

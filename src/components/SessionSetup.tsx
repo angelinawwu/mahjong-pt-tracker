@@ -51,7 +51,7 @@ export function SessionSetup() {
               onChange={(e) => updateName(i, e.target.value)}
               placeholder={`Player ${i + 1}`}
               maxLength={24}
-              className="hover-transition w-full rounded-xl border border-jade/20 bg-white/70 py-3.5 pr-4 pl-10 text-ink placeholder:text-ink/30 focus:border-jade focus:ring-2 focus:ring-jade/20 focus:outline-none"
+              className="hover-transition w-full border border-jade/20 bg-white/70 py-3.5 pr-4 pl-10 text-ink placeholder:text-ink/30 focus:border-jade focus:ring-2 focus:ring-jade/20 focus:outline-none"
             />
           </div>
         ))}
@@ -59,9 +59,9 @@ export function SessionSetup() {
         <button
           type="submit"
           disabled={!allFilled}
-          className={`hover-transition mt-4 w-full rounded-xl py-3.5 font-display text-lg tracking-wide ${
+          className={`hover-transition mt-4 w-full py-3.5 font-display text-lg tracking-wide ${
             allFilled
-              ? "bg-jade text-ivory shadow-[0_8px_24px_rgba(15,61,51,0.35)] hover:bg-jade-deep active:scale-[0.98]"
+              ? "bg-jade text-ivory shadow-[0_8px_24px_rgba(12,95,50,0.35)] hover:bg-jade-deep active:scale-[0.98]"
               : "cursor-not-allowed bg-ink/10 text-ink/30"
           }`}
         >

@@ -31,7 +31,7 @@ export function SessionSummary() {
           return (
             <div
               key={entry.player.id}
-              className={`flex items-center justify-between rounded-xl border px-4 py-4 ${
+              className={`flex items-center justify-between border px-4 py-4 ${
                 isFirst
                   ? "border-gold bg-gold-soft/70 shadow-[0_4px_20px_rgba(185,144,47,0.3)]"
                   : "border-ink/10 bg-white/60"
@@ -64,7 +64,7 @@ export function SessionSummary() {
       <button
         type="button"
         onClick={resetSession}
-        className="hover-transition mt-8 w-full rounded-xl bg-jade py-3.5 font-display text-lg tracking-wide text-ivory shadow-[0_8px_24px_rgba(15,61,51,0.35)] hover:bg-jade-deep active:scale-[0.98]"
+        className="hover-transition mt-8 w-full bg-jade py-3.5 font-display text-lg tracking-wide text-ivory shadow-[0_8px_24px_rgba(12,95,50,0.35)] hover:bg-jade-deep active:scale-[0.98]"
       >
         Start a new session
       </button>

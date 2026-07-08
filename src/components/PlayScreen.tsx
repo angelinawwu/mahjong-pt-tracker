@@ -46,7 +46,7 @@ export function PlayScreen() {
         <button
           type="button"
           onClick={endSession}
-          className="hover-transition rounded-full border border-lacquer/40 px-4 py-2 text-sm font-medium text-lacquer hover:bg-lacquer hover:text-ivory"
+          className="hover-transition border border-lacquer/40 px-4 py-2 text-sm font-medium text-lacquer hover:bg-lacquer hover:text-ivory"
         >
           End session
         </button>
@@ -64,10 +64,10 @@ export function PlayScreen() {
             key={tab.key}
             type="button"
             onClick={() => setActiveTab(tab.key)}
-            className={`hover-transition flex-1 rounded-full py-2 text-sm font-medium ${
+            className={`hover-transition flex-1 border py-2 text-sm font-medium ${
               activeTab === tab.key
-                ? "bg-jade text-ivory"
-                : "text-ink/60"
+                ? "border-jade bg-jade text-ivory"
+                : "border-ink/15 text-ink/60"
             }`}
           >
             {tab.label}
