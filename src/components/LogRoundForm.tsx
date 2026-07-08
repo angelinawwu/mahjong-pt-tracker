@@ -83,7 +83,7 @@ export function LogRoundForm({
       let newCombos = prev.comboIds.includes(id)
         ? prev.comboIds.filter((c) => c !== id)
         : [...prev.comboIds, id];
-        
+
       if (!prev.comboIds.includes(id)) {
         if (id === "no-flower") {
           newCombos = newCombos.filter((c) => c !== "own-flower");
@@ -97,7 +97,7 @@ export function LogRoundForm({
           });
         }
       }
-      
+
       return { ...prev, comboIds: newCombos };
     });
   }
@@ -142,12 +142,6 @@ export function LogRoundForm({
 
   return (
     <div className="flex flex-col gap-6">
-      <div>
-        <p className="text-xs font-semibold tracking-[0.3em] text-lacquer uppercase">
-          Round {roundNumber}
-        </p>
-        <h2 className="font-display text-2xl text-jade">Log this hand</h2>
-      </div>
 
       <section>
         <p className="mb-2 text-sm font-medium text-ink/70">Winner</p>
@@ -174,11 +168,10 @@ export function LogRoundForm({
                 type="button"
                 key={combo.id}
                 onClick={() => toggleCombo(combo.id)}
-                className={`hover-transition flex items-center justify-between rounded-xl border px-4 py-3 text-left ${
-                  checked
-                    ? "border-jade bg-jade-soft/60"
-                    : "border-ink/10 bg-white/60 hover:border-ink/25"
-                }`}
+                className={`hover-transition flex items-center justify-between rounded-xl border px-4 py-3 text-left ${checked
+                  ? "border-jade bg-jade-soft/60"
+                  : "border-ink/10 bg-white/60 hover:border-ink/25"
+                  }`}
               >
                 <span className="text-sm text-ink">
                   <span className="font-medium">{combo.name}</span>
@@ -195,20 +188,19 @@ export function LogRoundForm({
 
       <section>
         <p className="mb-2 text-sm font-medium text-ink/70">Modifiers</p>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <div className="flex flex-col gap-2">
           {COMBOS.filter((c) => c.category === "modifier").map((combo) => {
             const count = selection.comboIds.filter((id) => id === combo.id).length;
             const checked = count > 0;
-            
+
             if (combo.maxCount && combo.maxCount > 1) {
               return (
                 <div
                   key={combo.id}
-                  className={`flex items-center justify-between rounded-xl border px-4 py-3 text-left transition-colors ${
-                    checked
-                      ? "border-jade bg-jade-soft/60"
-                      : "border-ink/10 bg-white/60"
-                  }`}
+                  className={`flex items-center justify-between rounded-xl border px-4 py-3 text-left transition-colors ${checked
+                    ? "border-jade bg-jade-soft/60"
+                    : "border-ink/10 bg-white/60"
+                    }`}
                 >
                   <span className="text-sm text-ink">
                     <span className="font-medium">{combo.name}</span>
@@ -245,11 +237,10 @@ export function LogRoundForm({
                 type="button"
                 key={combo.id}
                 onClick={() => toggleCombo(combo.id)}
-                className={`hover-transition flex items-center justify-between rounded-xl border px-4 py-3 text-left ${
-                  checked
-                    ? "border-jade bg-jade-soft/60"
-                    : "border-ink/10 bg-white/60 hover:border-ink/25"
-                }`}
+                className={`hover-transition flex items-center justify-between rounded-xl border px-4 py-3 text-left ${checked
+                  ? "border-jade bg-jade-soft/60"
+                  : "border-ink/10 bg-white/60 hover:border-ink/25"
+                  }`}
               >
                 <span className="text-sm text-ink">
                   <span className="font-medium">{combo.name}</span>
@@ -270,16 +261,15 @@ export function LogRoundForm({
           {COMBOS.filter((c) => c.category === "flower").map((combo) => {
             const count = selection.comboIds.filter((id) => id === combo.id).length;
             const checked = count > 0;
-            
+
             if (combo.maxCount && combo.maxCount > 1) {
               return (
                 <div
                   key={combo.id}
-                  className={`flex items-center justify-between rounded-xl border px-4 py-3 text-left transition-colors ${
-                    checked
-                      ? "border-jade bg-jade-soft/60"
-                      : "border-ink/10 bg-white/60"
-                  }`}
+                  className={`flex items-center justify-between rounded-xl border px-4 py-3 text-left transition-colors ${checked
+                    ? "border-jade bg-jade-soft/60"
+                    : "border-ink/10 bg-white/60"
+                    }`}
                 >
                   <span className="text-sm text-ink">
                     <span className="font-medium">{combo.name}</span>
@@ -316,11 +306,10 @@ export function LogRoundForm({
                 type="button"
                 key={combo.id}
                 onClick={() => toggleCombo(combo.id)}
-                className={`hover-transition flex items-center justify-between rounded-xl border px-4 py-3 text-left ${
-                  checked
-                    ? "border-jade bg-jade-soft/60"
-                    : "border-ink/10 bg-white/60 hover:border-ink/25"
-                }`}
+                className={`hover-transition flex items-center justify-between rounded-xl border px-4 py-3 text-left ${checked
+                  ? "border-jade bg-jade-soft/60"
+                  : "border-ink/10 bg-white/60 hover:border-ink/25"
+                  }`}
               >
                 <span className="text-sm text-ink">
                   <span className="font-medium">{combo.name}</span>
@@ -348,11 +337,10 @@ export function LogRoundForm({
               type="button"
               key={opt.key}
               onClick={() => setWinType(opt.key)}
-              className={`hover-transition rounded-xl border px-4 py-3 text-sm font-medium ${
-                selection.winType === opt.key
-                  ? "border-lacquer bg-lacquer text-ivory"
-                  : "border-ink/10 bg-white/60 text-ink hover:border-ink/25"
-              }`}
+              className={`hover-transition rounded-xl border px-4 py-3 text-sm font-medium ${selection.winType === opt.key
+                ? "border-lacquer bg-lacquer text-ivory"
+                : "border-ink/10 bg-white/60 text-ink hover:border-ink/25"
+                }`}
             >
               {opt.label}
             </button>
@@ -389,11 +377,10 @@ export function LogRoundForm({
         type="button"
         disabled={!isValid}
         onClick={handleConfirm}
-        className={`hover-transition sticky bottom-4 w-full rounded-xl py-4 font-display text-lg tracking-wide ${
-          isValid
-            ? "bg-jade text-ivory shadow-[0_8px_24px_rgba(15,61,51,0.35)] hover:bg-jade-deep active:scale-[0.98]"
-            : "cursor-not-allowed bg-ink/10 text-ink/30"
-        }`}
+        className={`hover-transition sticky bottom-4 w-full rounded-xl py-4 font-display text-lg tracking-wide ${isValid
+          ? "bg-jade text-ivory shadow-[0_8px_24px_rgba(15,61,51,0.35)] hover:bg-jade-deep active:scale-[0.98]"
+          : "cursor-not-allowed bg-[#DADADA] text-ink/30"
+          }`}
       >
         Confirm round
       </button>

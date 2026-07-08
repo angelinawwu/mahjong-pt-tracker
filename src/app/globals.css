@@ -35,17 +35,15 @@
 
 body {
   background:
-    radial-gradient(
-      circle at 12% 8%,
+    radial-gradient(circle at 12% 8%,
       rgba(185, 144, 47, 0.1),
-      transparent 45%
-    ),
-    radial-gradient(
-      circle at 88% 92%,
+      transparent 45%),
+    radial-gradient(circle at 88% 92%,
       rgba(15, 61, 51, 0.08),
-      transparent 50%
-    ),
+      transparent 50%),
     var(--background);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-body), "Work Sans", sans-serif;
 }
@@ -63,6 +61,6 @@ h3,
 
 @media (hover: hover) and (pointer: fine) {
   .hover-transition {
-    transition: all 200ms ease;
+    transition: none;
   }
 }

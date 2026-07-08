@@ -25,6 +25,7 @@ export function calculateRoundPoints(
     deltas[id] = 0;
   });
 
+
   const others = allPlayerIds.filter((id) => id !== winnerId);
 
   if (winType === "selfDraw") {

@@ -8,11 +8,11 @@ import { LogRoundForm, type RoundSelection } from "./LogRoundForm";
 import { PayoutPreview } from "./PayoutPreview";
 import { Scoreboard } from "./Scoreboard";
 
-type MobileTab = "log" | "scoreboard";
+type ActiveTab = "log" | "scoreboard";
 
 export function PlayScreen() {
   const { session, endSession } = useSession();
-  const [mobileTab, setMobileTab] = useState<MobileTab>("log");
+  const [activeTab, setActiveTab] = useState<ActiveTab>("log");
   const [selection, setSelection] = useState<RoundSelection | null>(null);
 
   const desktopPreviewDeltas = useMemo(() => {
@@ -52,20 +52,20 @@ export function PlayScreen() {
         </button>
       </header>
 
-      {/* Mobile tabs */}
-      <div className="mb-5 flex gap-2 rounded-full bg-white/60 p-1 md:hidden">
+      {/* Tabs */}
+      <div className="mb-6 flex gap-2 rounded-full bg-white/60 p-1 max-w-sm">
         {(
           [
             { key: "log", label: "Log round" },
             { key: "scoreboard", label: "Scoreboard" },
-          ] as { key: MobileTab; label: string }[]
+          ] as { key: ActiveTab; label: string }[]
         ).map((tab) => (
           <button
             key={tab.key}
             type="button"
-            onClick={() => setMobileTab(tab.key)}
+            onClick={() => setActiveTab(tab.key)}
             className={`hover-transition flex-1 rounded-full py-2 text-sm font-medium ${
-              mobileTab === tab.key
+              activeTab === tab.key
                 ? "bg-jade text-ivory"
                 : "text-ink/60"
             }`}
@@ -75,33 +75,39 @@ export function PlayScreen() {
         ))}
       </div>
 
-      {/* Mobile: single column, one screen at a time */}
-      <div className="md:hidden">
-        {mobileTab === "log" ? (
-          <LogRoundForm
-            showInlinePreview
-            onSelectionChange={setSelection}
-            onConfirmed={() => setMobileTab("scoreboard")}
-          />
-        ) : (
-          <Scoreboard session={session} />
-        )}
-      </div>
+      {activeTab === "log" ? (
+        <>
+          {/* Mobile: single column */}
+          <div className="md:hidden">
+            <LogRoundForm
+              showInlinePreview
+              onSelectionChange={setSelection}
+              onConfirmed={() => setActiveTab("scoreboard")}
+            />
+          </div>
 
-      {/* Desktop: two-column, both always visible */}
-      <div className="hidden md:grid md:grid-cols-[1.1fr_0.9fr] md:gap-10">
-        <div className="flex flex-col gap-10">
-          <LogRoundForm onSelectionChange={setSelection} />
+          {/* Desktop: two-column layout */}
+          <div className="hidden md:grid md:grid-cols-[1.1fr_0.9fr] md:gap-10">
+            <div>
+              <LogRoundForm
+                onSelectionChange={setSelection}
+                onConfirmed={() => setActiveTab("scoreboard")}
+              />
+            </div>
+            <div className="sticky top-8 h-fit">
+              <PayoutPreview
+                players={session.players}
+                deltas={desktopPreviewDeltas}
+                winnerId={selection?.winnerId ?? null}
+              />
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="max-w-3xl">
           <Scoreboard session={session} />
         </div>
-        <div className="sticky top-8 h-fit">
-          <PayoutPreview
-            players={session.players}
-            deltas={desktopPreviewDeltas}
-            winnerId={selection?.winnerId ?? null}
-          />
-        </div>
-      </div>
+      )}
     </main>
   );
 }
