@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  --ivory: #f5efdf;
+  --ivory-deep: #ece2c9;
+  --ink: #1f2a24;
+  --jade: #0f3d33;
+  --jade-deep: #0a2b24;
+  --jade-soft: #dce9e2;
+  --lacquer: #a8291f;
+  --lacquer-deep: #7e1d16;
+  --gold: #b9902f;
+  --gold-soft: #f0dfab;
+
+  --background: var(--ivory);
+  --foreground: var(--ink);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ivory: var(--ivory);
+  --color-ivory-deep: var(--ivory-deep);
+  --color-ink: var(--ink);
+  --color-jade: var(--jade);
+  --color-jade-deep: var(--jade-deep);
+  --color-jade-soft: var(--jade-soft);
+  --color-lacquer: var(--lacquer);
+  --color-lacquer-deep: var(--lacquer-deep);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+body {
+  background:
+    radial-gradient(
+      circle at 12% 8%,
+      rgba(185, 144, 47, 0.1),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 88% 92%,
+      rgba(15, 61, 51, 0.08),
+      transparent 50%
+    ),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), "Work Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display), "Fraunces", serif;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hover-transition {
+    transition: all 200ms ease;
+  }
+}

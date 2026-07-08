@@ -1,0 +1,152 @@
+"use client";
+
+import { COMBOS } from "@/lib/combos";
+import { calculateStandings } from "@/lib/ranking";
+import type { Session } from "@/lib/types";
+
+function comboLabel(comboIds: string[]) {
+  return comboIds
+    .map((id) => COMBOS.find((c) => c.id === id)?.name ?? id)
+    .join(", ");
+}
+
+function playerName(session: Session, id: string) {
+  return session.players.find((p) => p.id === id)?.name ?? "—";
+}
+
+interface ScoreboardProps {
+  session: Session;
+  title?: string;
+}
+
+export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
+  const standings = calculateStandings(session.players, session.rounds);
+  const rounds = [...session.rounds].reverse();
+
+  return (
+    <div className="flex flex-col gap-8">
+      <section>
+        <h2 className="font-display mb-4 text-2xl text-jade">{title}</h2>
+        <div className="flex flex-col gap-2">
+          {standings.map((entry) => {
+            const isFirst = entry.rank === 1;
+            return (
+              <div
+                key={entry.player.id}
+                className={`hover-transition flex items-center justify-between rounded-xl border px-4 py-3.5 ${
+                  isFirst
+                    ? "border-gold bg-gold-soft/70 shadow-[0_4px_16px_rgba(185,144,47,0.25)]"
+                    : "border-ink/10 bg-white/60"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    className={`font-display flex h-8 w-8 items-center justify-center rounded-full text-sm ${
+                      isFirst
+                        ? "bg-gold text-ivory"
+                        : "bg-jade-soft text-jade"
+                    }`}
+                  >
+                    {entry.rank}
+                  </span>
+                  <span className="text-sm font-medium text-ink">
+                    {entry.player.name}
+                  </span>
+                </div>
+                <span
+                  className={`font-display tabular-nums ${
+                    isFirst ? "text-gold" : "text-ink/70"
+                  }`}
+                >
+                  {entry.total}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section>
+        <h3 className="font-display mb-3 text-lg text-jade">Round history</h3>
+        {rounds.length === 0 ? (
+          <p className="text-sm text-ink/40">No rounds logged yet.</p>
+        ) : (
+          <>
+            <div className="hidden overflow-hidden rounded-xl border border-ink/10 md:block">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-jade-soft/60 text-ink/60">
+                  <tr>
+                    <th className="px-4 py-2 font-medium">#</th>
+                    <th className="px-4 py-2 font-medium">Winner</th>
+                    <th className="px-4 py-2 font-medium">Combo(s)</th>
+                    <th className="px-4 py-2 font-medium">Type</th>
+                    <th className="px-4 py-2 font-medium">Points</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rounds.map((round) => (
+                    <tr key={round.id} className="border-t border-ink/5">
+                      <td className="px-4 py-2 text-ink/60">
+                        {round.roundNumber}
+                      </td>
+                      <td className="px-4 py-2 font-medium text-ink">
+                        {playerName(session, round.winnerId)}
+                      </td>
+                      <td className="px-4 py-2 text-ink/70">
+                        {comboLabel(round.comboIds)}
+                      </td>
+                      <td className="px-4 py-2 text-ink/70">
+                        {round.winType === "discard" ? "Discard" : "Self-draw"}
+                        {round.winType === "discard" && round.discarderId && (
+                          <span className="text-ink/40">
+                            {" "}
+                            ({playerName(session, round.discarderId)})
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-4 py-2 text-ink/70">
+                        {session.players
+                          .map(
+                            (p) =>
+                              `${p.name} +${round.pointDeltas[p.id] ?? 0}`
+                          )
+                          .join(" · ")}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="flex flex-col gap-2 md:hidden">
+              {rounds.map((round) => (
+                <div
+                  key={round.id}
+                  className="rounded-xl border border-ink/10 bg-white/60 px-4 py-3"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold tracking-wide text-lacquer uppercase">
+                      Round {round.roundNumber}
+                    </span>
+                    <span className="text-xs text-ink/50">
+                      {round.winType === "discard" ? "Discard" : "Self-draw"}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm font-medium text-ink">
+                    {playerName(session, round.winnerId)} won ·{" "}
+                    {comboLabel(round.comboIds)}
+                  </p>
+                  <p className="mt-1 text-xs text-ink/50">
+                    {session.players
+                      .map((p) => `${p.name} +${round.pointDeltas[p.id] ?? 0}`)
+                      .join(" · ")}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </section>
+    </div>
+  );
+}
