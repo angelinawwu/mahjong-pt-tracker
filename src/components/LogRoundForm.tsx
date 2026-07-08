@@ -144,7 +144,7 @@ export function LogRoundForm({
     <div className="flex flex-col gap-6">
 
       <section>
-        <p className="mb-2 text-sm font-medium text-ink/70">Winner</p>
+        <p className="mb-2 text-xs font-medium tracking-[0.3em] text-lacquer uppercase">Winner</p>
         <div className="flex flex-wrap gap-2">
           {players.map((p) => (
             <PlayerChip
@@ -159,7 +159,7 @@ export function LogRoundForm({
       </section>
 
       <section>
-        <p className="mb-2 text-sm font-medium text-ink/70">Hand Types</p>
+        <p className="mb-2 text-xs font-medium tracking-[0.3em] text-lacquer uppercase">Hand Types</p>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {COMBOS.filter((c) => c.category === "hand" || !c.category).map((combo) => {
             const checked = selection.comboIds.includes(combo.id);
@@ -173,9 +173,9 @@ export function LogRoundForm({
                   : "border-ink/10 bg-white hover:border-ink/25"
                   }`}
               >
-                <span className="text-sm text-ink">
-                  <span className="font-medium">{combo.name}</span>
-                  <span className="ml-2 text-ink/40">{combo.chineseName}</span>
+                <span className="text-sm text-jade">
+                  <span>{combo.name}</span>
+                  <span className="ml-2 font-medium text-ink/40">{combo.chineseName}</span>
                 </span>
                 <span className={`font-display text-base ${checked ? "text-jade" : "text-accent-blue"}`}>
                   +{combo.value}
@@ -187,7 +187,7 @@ export function LogRoundForm({
       </section>
 
       <section>
-        <p className="mb-2 text-sm font-medium text-ink/70">Modifiers</p>
+        <p className="mb-2 text-xs font-medium tracking-[0.3em] text-lacquer uppercase">Modifiers</p>
         <div className="flex flex-col gap-2">
           {COMBOS.filter((c) => c.category === "modifier").map((combo) => {
             const count = selection.comboIds.filter((id) => id === combo.id).length;
@@ -202,9 +202,9 @@ export function LogRoundForm({
                     : "border-ink/10 bg-white"
                     }`}
                 >
-                  <span className="text-sm text-ink">
-                    <span className="font-medium">{combo.name}</span>
-                    <span className="ml-2 text-ink/40">{combo.chineseName}</span>
+                  <span className="text-sm text-jade">
+                    <span>{combo.name}</span>
+                    <span className="ml-2 font-medium text-ink/40">{combo.chineseName}</span>
                   </span>
                   <div className="flex items-center gap-3">
                     <span className={`font-display text-base ${checked ? "text-jade" : "text-accent-blue"}`}>
@@ -214,15 +214,15 @@ export function LogRoundForm({
                       <button
                         type="button"
                         onClick={() => setComboCount(combo.id, Math.max(0, count - 1))}
-                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-ink hover:bg-ink/10 active:scale-95"
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-95"
                       >
                         -
                       </button>
-                      <span className="w-4 text-center text-sm font-medium">{count}</span>
+                      <span className="w-4 text-center text-sm text-jade">{count}</span>
                       <button
                         type="button"
                         onClick={() => setComboCount(combo.id, Math.min(combo.maxCount!, count + 1))}
-                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-ink hover:bg-ink/10 active:scale-95"
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-95"
                       >
                         +
                       </button>
@@ -242,9 +242,9 @@ export function LogRoundForm({
                   : "border-ink/10 bg-white hover:border-ink/25"
                   }`}
               >
-                <span className="text-sm text-ink">
-                  <span className="font-medium">{combo.name}</span>
-                  <span className="ml-2 text-ink/40">{combo.chineseName}</span>
+                <span className="text-sm text-jade">
+                  <span>{combo.name}</span>
+                  <span className="ml-2 font-medium text-ink/40">{combo.chineseName}</span>
                 </span>
                 <span className={`font-display text-base ${checked ? "text-jade" : "text-accent-blue"}`}>
                   +{combo.value}
@@ -256,7 +256,7 @@ export function LogRoundForm({
       </section>
 
       <section>
-        <p className="mb-2 text-sm font-medium text-ink/70">Flowers</p>
+        <p className="mb-2 text-xs font-medium tracking-[0.3em] text-lacquer uppercase">Flowers</p>
         <div className="flex flex-col gap-2">
           {COMBOS.filter((c) => c.category === "flower").map((combo) => {
             const count = selection.comboIds.filter((id) => id === combo.id).length;
@@ -271,9 +271,9 @@ export function LogRoundForm({
                     : "border-ink/10 bg-white"
                     }`}
                 >
-                  <span className="text-sm text-ink">
-                    <span className="font-medium">{combo.name}</span>
-                    <span className="ml-2 text-ink/40">{combo.chineseName}</span>
+                  <span className="text-sm text-jade">
+                    <span>{combo.name}</span>
+                    <span className="ml-2 font-medium text-ink/40">{combo.chineseName}</span>
                   </span>
                   <div className="flex items-center gap-3">
                     <span className={`font-display text-base ${checked ? "text-jade" : "text-accent-blue"}`}>
@@ -283,15 +283,15 @@ export function LogRoundForm({
                       <button
                         type="button"
                         onClick={() => setComboCount(combo.id, Math.max(0, count - 1))}
-                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-ink hover:bg-ink/10 active:scale-95"
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-95"
                       >
                         -
                       </button>
-                      <span className="w-4 text-center text-sm font-medium">{count}</span>
+                      <span className="w-4 text-center text-sm text-jade">{count}</span>
                       <button
                         type="button"
                         onClick={() => setComboCount(combo.id, Math.min(combo.maxCount!, count + 1))}
-                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-ink hover:bg-ink/10 active:scale-95"
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-95"
                       >
                         +
                       </button>
@@ -311,9 +311,9 @@ export function LogRoundForm({
                   : "border-ink/10 bg-white hover:border-ink/25"
                   }`}
               >
-                <span className="text-sm text-ink">
-                  <span className="font-medium">{combo.name}</span>
-                  <span className="ml-2 text-ink/40">{combo.chineseName}</span>
+                <span className="text-sm text-jade">
+                  <span>{combo.name}</span>
+                  <span className="ml-2 font-medium text-ink/40">{combo.chineseName}</span>
                 </span>
                 <span className={`font-display text-base ${checked ? "text-jade" : "text-accent-blue"}`}>
                   +{combo.value}
@@ -325,7 +325,7 @@ export function LogRoundForm({
       </section>
 
       <section>
-        <p className="mb-2 text-sm font-medium text-ink/70">Win type</p>
+        <p className="mb-2 text-xs font-medium tracking-[0.3em] text-lacquer uppercase">Win type</p>
         <div className="grid grid-cols-2 gap-2">
           {(
             [
@@ -337,9 +337,9 @@ export function LogRoundForm({
               type="button"
               key={opt.key}
               onClick={() => setWinType(opt.key)}
-              className={`hover-transition border px-4 py-3 text-sm font-medium ${selection.winType === opt.key
+              className={`hover-transition border px-4 py-3 text-sm font-normal ${selection.winType === opt.key
                 ? "border-jade bg-jade/10 text-jade"
-                : "border-ink/10 bg-white text-ink hover:border-ink/25"
+                : "border-ink/10 bg-white text-jade hover:border-ink/25"
                 }`}
             >
               {opt.label}
@@ -350,7 +350,7 @@ export function LogRoundForm({
 
       {selection.winType === "discard" && (
         <section>
-          <p className="mb-2 text-sm font-medium text-ink/70">Discarder</p>
+          <p className="mb-2 text-xs font-medium tracking-[0.3em] text-lacquer uppercase">Discarder</p>
           <div className="flex flex-wrap gap-2">
             {others.map((p) => (
               <PlayerChip

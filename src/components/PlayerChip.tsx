@@ -25,7 +25,7 @@ export function PlayerChip({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={`hover-transition flex h-[38px] items-center justify-center border px-[17px] text-sm font-medium whitespace-nowrap ${
+      className={`hover-transition flex h-[38px] items-center justify-center border px-[17px] text-sm font-normal whitespace-nowrap ${
         disabled
           ? "cursor-not-allowed border-ink/10 bg-ink/5 text-ink/30"
           : selected

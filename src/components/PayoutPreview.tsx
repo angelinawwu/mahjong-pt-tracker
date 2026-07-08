@@ -12,9 +12,6 @@ export function PayoutPreview({ players, deltas, winnerId }: PayoutPreviewProps)
   return (
     <div className="border border-ink/15 bg-white/70 p-[21px]">
       <p className="font-display text-lg text-jade">Payout preview</p>
-      <p className="mt-1 text-xs tracking-wide text-ink/50 uppercase">
-        Updates as you choose
-      </p>
       <div className="mt-4 flex flex-col gap-2">
         {players.map((player) => {
           const delta = deltas ? deltas[player.id] ?? 0 : 0;

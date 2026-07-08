@@ -36,8 +36,8 @@ export function PlayScreen() {
     <main className="mx-auto min-h-dvh w-full max-w-5xl px-4 pb-24 pt-8 md:px-8 md:pb-16">
       <header className="mb-6 flex items-center justify-between">
         <div>
-          <p className="text-xs font-semibold tracking-[0.3em] text-lacquer uppercase">
-            麻將 · Table Talley
+          <p className="text-xs font-medium tracking-[0.3em] text-lacquer uppercase">
+            麻將 · MAHJONG
           </p>
           <h1 className="font-display text-2xl text-jade">
             Round {session.rounds.length + 1}
@@ -46,7 +46,7 @@ export function PlayScreen() {
         <button
           type="button"
           onClick={endSession}
-          className="hover-transition border border-lacquer/40 px-4 py-2 text-sm font-medium text-lacquer hover:bg-lacquer hover:text-ivory"
+          className="hover-transition border border-[rgba(168,41,31,0.4)] px-4 py-2 text-sm font-normal text-lacquer hover:bg-lacquer hover:text-ivory"
         >
           End session
         </button>
@@ -64,7 +64,7 @@ export function PlayScreen() {
             key={tab.key}
             type="button"
             onClick={() => setActiveTab(tab.key)}
-            className={`hover-transition flex-1 border py-2 text-sm font-medium ${
+            className={`hover-transition flex-1 border py-2 text-sm font-normal ${
               activeTab === tab.key
                 ? "border-jade bg-jade text-ivory"
                 : "border-ink/15 text-ink/60"
