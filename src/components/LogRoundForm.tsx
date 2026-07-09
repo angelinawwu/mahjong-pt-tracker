@@ -391,7 +391,7 @@ export function LogRoundForm({
         type="button"
         disabled={!isValid}
         onClick={handleConfirm}
-        className={`hover-transition sticky bottom-4 w-full py-4 font-display text-lg tracking-wide ${isValid
+        className={`hover-transition w-full py-4 font-display text-lg tracking-wide ${isValid
           ? "bg-jade text-ivory hover:bg-jade-deep active:scale-[0.98]"
           : "cursor-not-allowed bg-[#DADADA] text-ink/30"
           }`}
