@@ -143,6 +143,7 @@ export function LogRoundForm({
   return (
     <div className="flex flex-col gap-6">
 
+      {/* --- Winner Selection --- */}
       <section>
         <p className="mb-2 text-xs font-medium tracking-[0.3em] text-lacquer uppercase">Winner</p>
         <div className="flex flex-wrap gap-2">
@@ -158,6 +159,7 @@ export function LogRoundForm({
         </div>
       </section>
 
+      {/* --- Hand Types Selection --- */}
       <section>
         <p className="mb-2 text-xs font-medium tracking-[0.3em] text-lacquer uppercase">Hand Types</p>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -186,6 +188,7 @@ export function LogRoundForm({
         </div>
       </section>
 
+      {/* --- Modifiers Selection --- */}
       <section>
         <p className="mb-2 text-xs font-medium tracking-[0.3em] text-lacquer uppercase">Modifiers</p>
         <div className="flex flex-col gap-2">
@@ -198,7 +201,7 @@ export function LogRoundForm({
                 <div
                   key={combo.id}
                   onClick={() => setComboCount(combo.id, checked ? count - 1 : 1)}
-                  className={`flex cursor-pointer items-center justify-between border px-4 py-3 text-left transition-colors ${checked
+                  className={`flex cursor-pointer items-center justify-between border px-4 py-2 text-left transition-colors ${checked
                     ? "border-jade bg-jade/10"
                     : "border-ink/10 bg-white hover:bg-jade/5"
                     }`}
@@ -211,7 +214,7 @@ export function LogRoundForm({
                     <span className={`font-display text-base ${checked ? "text-jade" : "text-accent-blue"}`}>
                       +{combo.value * count}
                     </span>
-                    <div className="flex items-center gap-1 border border-ink/0 bg-white p-[5px]">
+                    <div className="flex items-center gap-1 border border-ink/0 bg-white p-1">
                       <button
                         type="button"
                         onClick={(e) => {
@@ -262,6 +265,7 @@ export function LogRoundForm({
         </div>
       </section>
 
+      {/* --- Flowers Selection --- */}
       <section>
         <p className="mb-2 text-xs font-medium tracking-[0.3em] text-lacquer uppercase">Flowers</p>
         <div className="flex flex-col gap-2">
@@ -274,7 +278,7 @@ export function LogRoundForm({
                 <div
                   key={combo.id}
                   onClick={() => setComboCount(combo.id, checked ? count - 1 : 1)}
-                  className={`flex cursor-pointer items-center justify-between border px-4 py-3 text-left transition-colors ${checked
+                  className={`flex cursor-pointer items-center justify-between border px-4 py-2 text-left transition-colors ${checked
                     ? "border-jade bg-jade/10"
                     : "border-ink/10 bg-white hover:bg-jade/5"
                     }`}
@@ -287,7 +291,7 @@ export function LogRoundForm({
                     <span className={`font-display text-base ${checked ? "text-jade" : "text-accent-blue"}`}>
                       +{combo.value * count}
                     </span>
-                    <div className="flex items-center gap-1 border border-ink/0 bg-white p-[5px]">
+                    <div className="flex items-center gap-1 border border-ink/0 bg-white p-1">
                       <button
                         type="button"
                         onClick={(e) => {
@@ -338,6 +342,7 @@ export function LogRoundForm({
         </div>
       </section>
 
+      {/* --- Win Type Selection --- */}
       <section>
         <p className="mb-2 text-xs font-medium tracking-[0.3em] text-lacquer uppercase">Win type</p>
         <div className="grid grid-cols-2 gap-2">
@@ -362,6 +367,7 @@ export function LogRoundForm({
         </div>
       </section>
 
+      {/* --- Discarder Selection (if applicable) --- */}
       {selection.winType === "discard" && (
         <section>
           <p className="mb-2 text-xs font-medium tracking-[0.3em] text-lacquer uppercase">Discarder</p>
@@ -379,6 +385,7 @@ export function LogRoundForm({
         </section>
       )}
 
+      {/* --- Inline Payout Preview --- */}
       {showInlinePreview && (
         <PayoutPreview
           players={players}
@@ -387,6 +394,7 @@ export function LogRoundForm({
         />
       )}
 
+      {/* --- Submit Action --- */}
       <button
         type="button"
         disabled={!isValid}

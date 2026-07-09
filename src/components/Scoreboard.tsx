@@ -25,6 +25,7 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
 
   return (
     <div className="flex flex-col gap-8">
+      {/* --- Current Standings / Leaderboard --- */}
       <section>
         <h2 className="font-display mb-4 text-lg text-jade">{title}</h2>
         <div className="flex flex-col gap-2">
@@ -51,6 +52,7 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
         </div>
       </section>
 
+      {/* --- Round History Log --- */}
       <section>
         <h3 className="font-display mb-3 text-lg text-jade">Round history</h3>
         {rounds.length === 0 ? (

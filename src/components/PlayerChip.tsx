@@ -20,6 +20,7 @@ export function PlayerChip({
       ? "border-lacquer bg-lacquer/10 text-lacquer"
       : "border-jade bg-jade/10 text-jade";
 
+  // --- Render Player Chip ---
   return (
     <button
       type="button"

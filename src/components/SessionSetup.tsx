@@ -30,6 +30,7 @@ export function SessionSetup() {
 
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-md flex-col justify-center px-6 py-12">
+      {/* --- Header / Title --- */}
       <div className="mb-10 text-center">
         <p className="mb-2 text-xs font-semibold tracking-[0.3em] text-lacquer uppercase">
           麻將 · Table Talley
@@ -40,6 +41,7 @@ export function SessionSetup() {
         </p>
       </div>
 
+      {/* --- Player Setup Form --- */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         {names.map((name, i) => (
           <div key={i} className="relative">
