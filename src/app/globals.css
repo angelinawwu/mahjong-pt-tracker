@@ -40,7 +40,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: var(--foreground);
-  font-family: var(--font-body), "Work Sans", sans-serif;
+  font-family: var(--font-body), "Helvetica Neue", sans-serif;
 }
 
 h1,

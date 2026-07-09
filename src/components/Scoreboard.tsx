@@ -29,35 +29,20 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
         <h2 className="font-display mb-4 text-2xl text-jade">{title}</h2>
         <div className="flex flex-col gap-2">
           {standings.map((entry) => {
-            const isFirst = entry.rank === 1;
             return (
               <div
                 key={entry.player.id}
-                className={`hover-transition flex items-center justify-between border px-4 py-3.5 ${
-                  isFirst
-                    ? "border-gold bg-gold-soft/70 shadow-[0_4px_16px_rgba(185,144,47,0.25)]"
-                    : "border-ink/10 bg-white/60"
-                }`}
+                className="hover-transition flex items-center justify-between border px-4 py-3.5 border-ink/10 bg-white/60"
               >
                 <div className="flex items-center gap-3">
-                  <span
-                    className={`font-display flex h-8 w-8 items-center justify-center rounded-full text-sm ${
-                      isFirst
-                        ? "bg-gold text-ivory"
-                        : "bg-jade-soft text-jade"
-                    }`}
-                  >
+                  <span className="font-display flex h-8 w-8 items-center justify-center rounded-full text-sm bg-jade-soft text-jade">
                     {entry.rank}
                   </span>
                   <span className="text-sm font-medium text-ink">
                     {entry.player.name}
                   </span>
                 </div>
-                <span
-                  className={`font-display tabular-nums ${
-                    isFirst ? "text-gold" : "text-ink/70"
-                  }`}
-                >
+                <span className="font-display tabular-nums text-ink/70">
                   {entry.total}
                 </span>
               </div>

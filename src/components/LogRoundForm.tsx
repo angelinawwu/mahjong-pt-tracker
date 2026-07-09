@@ -170,7 +170,7 @@ export function LogRoundForm({
                 onClick={() => toggleCombo(combo.id)}
                 className={`hover-transition flex items-center justify-between border px-4 py-3 text-left ${checked
                   ? "border-jade bg-jade/10"
-                  : "border-ink/10 bg-white hover:border-ink/25"
+                  : "border-ink/10 bg-white hover:bg-jade/5"
                   }`}
               >
                 <span className="text-sm text-jade">
@@ -197,9 +197,10 @@ export function LogRoundForm({
               return (
                 <div
                   key={combo.id}
-                  className={`flex items-center justify-between border px-4 py-3 text-left transition-colors ${checked
+                  onClick={() => setComboCount(combo.id, checked ? count - 1 : 1)}
+                  className={`flex cursor-pointer items-center justify-between border px-4 py-3 text-left transition-colors ${checked
                     ? "border-jade bg-jade/10"
-                    : "border-ink/10 bg-white"
+                    : "border-ink/10 bg-white hover:bg-jade/5"
                     }`}
                 >
                   <span className="text-sm text-jade">
@@ -213,7 +214,10 @@ export function LogRoundForm({
                     <div className="flex items-center gap-1 border border-ink/0 bg-white p-[5px]">
                       <button
                         type="button"
-                        onClick={() => setComboCount(combo.id, Math.max(0, count - 1))}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setComboCount(combo.id, Math.max(0, count - 1));
+                        }}
                         className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-95"
                       >
                         -
@@ -221,7 +225,10 @@ export function LogRoundForm({
                       <span className="w-4 text-center text-sm text-jade">{count}</span>
                       <button
                         type="button"
-                        onClick={() => setComboCount(combo.id, Math.min(combo.maxCount!, count + 1))}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setComboCount(combo.id, Math.min(combo.maxCount!, count + 1));
+                        }}
                         className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-95"
                       >
                         +
@@ -239,7 +246,7 @@ export function LogRoundForm({
                 onClick={() => toggleCombo(combo.id)}
                 className={`hover-transition flex items-center justify-between border px-4 py-3 text-left ${checked
                   ? "border-jade bg-jade/10"
-                  : "border-ink/10 bg-white hover:border-ink/25"
+                  : "border-ink/10 bg-white hover:bg-jade/5"
                   }`}
               >
                 <span className="text-sm text-jade">
@@ -266,9 +273,10 @@ export function LogRoundForm({
               return (
                 <div
                   key={combo.id}
-                  className={`flex items-center justify-between border px-4 py-3 text-left transition-colors ${checked
+                  onClick={() => setComboCount(combo.id, checked ? count - 1 : 1)}
+                  className={`flex cursor-pointer items-center justify-between border px-4 py-3 text-left transition-colors ${checked
                     ? "border-jade bg-jade/10"
-                    : "border-ink/10 bg-white"
+                    : "border-ink/10 bg-white hover:bg-jade/5"
                     }`}
                 >
                   <span className="text-sm text-jade">
@@ -282,7 +290,10 @@ export function LogRoundForm({
                     <div className="flex items-center gap-1 border border-ink/0 bg-white p-[5px]">
                       <button
                         type="button"
-                        onClick={() => setComboCount(combo.id, Math.max(0, count - 1))}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setComboCount(combo.id, Math.max(0, count - 1));
+                        }}
                         className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-95"
                       >
                         -
@@ -290,7 +301,10 @@ export function LogRoundForm({
                       <span className="w-4 text-center text-sm text-jade">{count}</span>
                       <button
                         type="button"
-                        onClick={() => setComboCount(combo.id, Math.min(combo.maxCount!, count + 1))}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setComboCount(combo.id, Math.min(combo.maxCount!, count + 1));
+                        }}
                         className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-95"
                       >
                         +
@@ -308,7 +322,7 @@ export function LogRoundForm({
                 onClick={() => toggleCombo(combo.id)}
                 className={`hover-transition flex items-center justify-between border px-4 py-3 text-left ${checked
                   ? "border-jade bg-jade/10"
-                  : "border-ink/10 bg-white hover:border-ink/25"
+                  : "border-ink/10 bg-white hover:bg-jade/5"
                   }`}
               >
                 <span className="text-sm text-jade">
@@ -339,7 +353,7 @@ export function LogRoundForm({
               onClick={() => setWinType(opt.key)}
               className={`hover-transition border px-4 py-3 text-sm font-normal ${selection.winType === opt.key
                 ? "border-jade bg-jade/10 text-jade"
-                : "border-ink/10 bg-white text-jade hover:border-ink/25"
+                : "border-ink/10 bg-white text-jade hover:bg-jade/5"
                 }`}
             >
               {opt.label}
@@ -378,7 +392,7 @@ export function LogRoundForm({
         disabled={!isValid}
         onClick={handleConfirm}
         className={`hover-transition sticky bottom-4 w-full py-4 font-display text-lg tracking-wide ${isValid
-          ? "bg-jade text-ivory shadow-[0_8px_24px_rgba(12,95,50,0.35)] hover:bg-jade-deep active:scale-[0.98]"
+          ? "bg-jade text-ivory hover:bg-jade-deep active:scale-[0.98]"
           : "cursor-not-allowed bg-[#DADADA] text-ink/30"
           }`}
       >

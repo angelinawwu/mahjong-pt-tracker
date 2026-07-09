@@ -61,7 +61,7 @@ export function SessionSetup() {
           disabled={!allFilled}
           className={`hover-transition mt-4 w-full py-3.5 font-display text-lg tracking-wide ${
             allFilled
-              ? "bg-jade text-ivory shadow-[0_8px_24px_rgba(12,95,50,0.35)] hover:bg-jade-deep active:scale-[0.98]"
+              ? "bg-jade text-ivory hover:bg-jade-deep active:scale-[0.98]"
               : "cursor-not-allowed bg-ink/10 text-ink/30"
           }`}
         >
