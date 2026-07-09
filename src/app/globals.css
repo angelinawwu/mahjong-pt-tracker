@@ -32,7 +32,6 @@
   --color-gold-soft: var(--gold-soft);
   --color-accent-blue: var(--accent-blue);
   --font-display: var(--font-display);
-  --font-body: var(--font-body);
 }
 
 body {
@@ -40,7 +39,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: var(--foreground);
-  font-family: var(--font-body), "Helvetica Neue", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 h1,
