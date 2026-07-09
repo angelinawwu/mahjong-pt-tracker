@@ -53,7 +53,7 @@ export function PlayScreen() {
       </header>
 
       {/* Tabs */}
-      <div className="mb-6 flex gap-2 rounded-full bg-white/60 p-1 max-w-sm">
+      <div className="mb-6 flex rounded-full bg-white/60 w-full md:max-w-sm">
         {(
           [
             { key: "log", label: "Log round" },
@@ -64,11 +64,10 @@ export function PlayScreen() {
             key={tab.key}
             type="button"
             onClick={() => setActiveTab(tab.key)}
-            className={`hover-transition flex-1 border py-2 text-sm font-normal ${
-              activeTab === tab.key
-                ? "border-jade bg-jade text-ivory"
-                : "border-ink/15 text-ink/60"
-            }`}
+            className={`hover-transition flex-1 border py-2 text-sm font-normal ${activeTab === tab.key
+              ? "border-jade bg-jade text-ivory"
+              : "border-ink/10 text-ink/60"
+              }`}
           >
             {tab.label}
           </button>

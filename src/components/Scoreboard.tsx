@@ -112,7 +112,7 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
                   className="border border-ink/10 bg-white/60 px-4 py-3"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold tracking-wide text-lacquer uppercase">
+                    <span className="text-xs font-medium tracking-[0.3em] text-lacquer uppercase">
                       Round {round.roundNumber}
                     </span>
                     <span className="text-xs text-ink/50">

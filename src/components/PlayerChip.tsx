@@ -27,10 +27,10 @@ export function PlayerChip({
       disabled={disabled}
       onClick={onClick}
       className={`hover-transition flex h-[38px] items-center justify-center border px-[17px] text-sm font-normal whitespace-nowrap ${disabled
-          ? "cursor-not-allowed border-ink/10 bg-ink/5 text-ink/30"
-          : selected
-            ? activeClasses
-            : "border-ink/15 bg-white text-jade hover:bg-jade/5"
+        ? "cursor-not-allowed border-ink/10 bg-ink/5 text-ink/30"
+        : selected
+          ? activeClasses
+          : "border-ink/10 bg-white text-jade hover:bg-jade/5"
         } ${!disabled && "active:scale-95"}`}
     >
       {label}

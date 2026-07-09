@@ -10,7 +10,7 @@ interface PayoutPreviewProps {
 
 export function PayoutPreview({ players, deltas, winnerId }: PayoutPreviewProps) {
   return (
-    <div className="border border-ink/15 bg-white/70 p-[21px]">
+    <div className="border border-ink/10 bg-white/70 p-[21px]">
       <p className="font-display text-lg text-jade">Payout preview</p>
       <div className="mt-4 flex flex-col gap-2">
         {players.map((player) => {
@@ -19,9 +19,8 @@ export function PayoutPreview({ players, deltas, winnerId }: PayoutPreviewProps)
           return (
             <div
               key={player.id}
-              className={`flex items-center justify-between border px-[17px] py-[13px] transition-colors duration-200 ${
-                isWinner ? "border-jade bg-jade/10" : "border-lacquer bg-lacquer/10"
-              }`}
+              className={`flex items-center justify-between border px-[17px] py-[13px] transition-colors duration-200 ${isWinner ? "border-jade bg-jade/10" : "border-lacquer bg-lacquer/10"
+                }`}
             >
               <span
                 className={`text-sm font-medium ${isWinner ? "text-jade" : "text-lacquer"}`}
@@ -34,9 +33,8 @@ export function PayoutPreview({ players, deltas, winnerId }: PayoutPreviewProps)
                 )}
               </span>
               <span
-                className={`font-display text-base tabular-nums ${
-                  isWinner ? "text-jade" : "text-lacquer"
-                }`}
+                className={`font-display text-base tabular-nums ${isWinner ? "text-jade" : "text-lacquer"
+                  }`}
               >
                 {deltas === null ? "—" : isWinner ? "0" : `+${delta}`}
               </span>
