@@ -2,15 +2,11 @@
 
 :root {
   --ivory: #fafaf9;
-  --ivory-deep: #f0edea;
   --ink: #1f2a24;
   --jade: #0c5f32;
   --jade-deep: #084a27;
   --jade-soft: #dce9e2;
   --lacquer: #cd2b1f;
-  --lacquer-deep: #a32218;
-  --gold: #b9902f;
-  --gold-soft: #f0dfab;
   --accent-blue: #0149f3;
 
   --background: #ffffff;
@@ -21,15 +17,11 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-ivory: var(--ivory);
-  --color-ivory-deep: var(--ivory-deep);
   --color-ink: var(--ink);
   --color-jade: var(--jade);
   --color-jade-deep: var(--jade-deep);
   --color-jade-soft: var(--jade-soft);
   --color-lacquer: var(--lacquer);
-  --color-lacquer-deep: var(--lacquer-deep);
-  --color-gold: var(--gold);
-  --color-gold-soft: var(--gold-soft);
   --color-accent-blue: var(--accent-blue);
   --font-display: var(--font-display);
 }
