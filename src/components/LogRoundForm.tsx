@@ -170,14 +170,14 @@ export function LogRoundForm({
                 type="button"
                 key={combo.id}
                 onClick={() => toggleCombo(combo.id)}
-                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left ${checked
+                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left active:scale-95 ${checked
                   ? "border-jade bg-jade/10"
                   : "border-ink/10 bg-white hover:bg-jade/5"
                   }`}
               >
                 <span className="text-sm text-jade">
                   <span>{combo.name}</span>
-                  <span className="ml-2 font-medium text-ink/40">{combo.chineseName}</span>
+                  <span className="ml-2 text-ink/40">{combo.chineseName}</span>
                 </span>
                 <span className={`font-display text-base ${checked ? "text-jade" : "text-accent-blue"}`}>
                   +{combo.value}
@@ -201,14 +201,14 @@ export function LogRoundForm({
                 <div
                   key={combo.id}
                   onClick={() => setComboCount(combo.id, checked ? count - 1 : 1)}
-                  className={`flex cursor-pointer items-center justify-between border px-4 py-2 text-left transition-colors ${checked
+                  className={`hover-transition flex cursor-pointer items-center justify-between border px-4 py-2 text-left active:scale-95 ${checked
                     ? "border-jade bg-jade/10"
                     : "border-ink/10 bg-white hover:bg-jade/5"
                     }`}
                 >
                   <span className="text-sm text-jade">
                     <span>{combo.name}</span>
-                    <span className="ml-2 font-medium text-ink/40">{combo.chineseName}</span>
+                    <span className="ml-2 text-ink/40">{combo.chineseName}</span>
                   </span>
                   <div className="flex items-center gap-3">
                     <span className={`font-display text-base ${checked ? "text-jade" : "text-accent-blue"}`}>
@@ -247,14 +247,14 @@ export function LogRoundForm({
                 type="button"
                 key={combo.id}
                 onClick={() => toggleCombo(combo.id)}
-                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left ${checked
+                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left active:scale-95 ${checked
                   ? "border-jade bg-jade/10"
                   : "border-ink/10 bg-white hover:bg-jade/5"
                   }`}
               >
                 <span className="text-sm text-jade">
                   <span>{combo.name}</span>
-                  <span className="ml-2 font-medium text-ink/40">{combo.chineseName}</span>
+                  <span className="ml-2 text-ink/40">{combo.chineseName}</span>
                 </span>
                 <span className={`font-display text-base ${checked ? "text-jade" : "text-accent-blue"}`}>
                   +{combo.value}
@@ -278,14 +278,14 @@ export function LogRoundForm({
                 <div
                   key={combo.id}
                   onClick={() => setComboCount(combo.id, checked ? count - 1 : 1)}
-                  className={`flex cursor-pointer items-center justify-between border px-4 py-2 text-left transition-colors ${checked
+                  className={`hover-transition flex cursor-pointer items-center justify-between border px-4 py-2 text-left active:scale-95 ${checked
                     ? "border-jade bg-jade/10"
                     : "border-ink/10 bg-white hover:bg-jade/5"
                     }`}
                 >
                   <span className="text-sm text-jade">
                     <span>{combo.name}</span>
-                    <span className="ml-2 font-medium text-ink/40">{combo.chineseName}</span>
+                    <span className="ml-2 text-ink/40">{combo.chineseName}</span>
                   </span>
                   <div className="flex items-center gap-3">
                     <span className={`font-display text-base ${checked ? "text-jade" : "text-accent-blue"}`}>
@@ -324,14 +324,14 @@ export function LogRoundForm({
                 type="button"
                 key={combo.id}
                 onClick={() => toggleCombo(combo.id)}
-                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left ${checked
+                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left active:scale-95 ${checked
                   ? "border-jade bg-jade/10"
                   : "border-ink/10 bg-white hover:bg-jade/5"
                   }`}
               >
                 <span className="text-sm text-jade">
                   <span>{combo.name}</span>
-                  <span className="ml-2 font-medium text-ink/40">{combo.chineseName}</span>
+                  <span className="ml-2 text-ink/40">{combo.chineseName}</span>
                 </span>
                 <span className={`font-display text-base ${checked ? "text-jade" : "text-accent-blue"}`}>
                   +{combo.value}
@@ -356,7 +356,7 @@ export function LogRoundForm({
               type="button"
               key={opt.key}
               onClick={() => setWinType(opt.key)}
-              className={`hover-transition border px-4 py-3 text-sm font-normal ${selection.winType === opt.key
+              className={`hover-transition border px-4 py-3 text-sm font-normal active:scale-95 ${selection.winType === opt.key
                 ? "border-jade bg-jade/10 text-jade"
                 : "border-ink/10 bg-white text-jade hover:bg-jade/5"
                 }`}

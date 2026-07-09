@@ -33,7 +33,7 @@ export function SessionSummary() {
               className="flex items-center justify-between border px-4 py-4 border-ink/10 bg-white/60"
             >
               <div className="flex items-center gap-3">
-                <span className="font-display flex h-9 w-9 items-center justify-center rounded-full bg-jade-soft text-jade">
+                <span className="font-display flex h-9 w-9 items-center justify-center rounded-full bg-jade/10 text-jade">
                   {entry.rank}
                 </span>
                 <span className="font-medium text-ink">

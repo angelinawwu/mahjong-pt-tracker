@@ -33,7 +33,7 @@ export function SessionSetup() {
       {/* --- Header / Title --- */}
       <div className="mb-10 text-center">
         <p className="mb-2 text-xs font-semibold tracking-[0.3em] text-lacquer uppercase">
-          麻將 · Table Talley
+          麻將 · Mahjong
         </p>
         <h1 className="font-display text-4xl text-jade">Who&apos;s playing?</h1>
         <p className="mt-3 text-sm text-ink/60">
@@ -61,11 +61,10 @@ export function SessionSetup() {
         <button
           type="submit"
           disabled={!allFilled}
-          className={`hover-transition mt-4 w-full py-3.5 font-display text-lg tracking-wide ${
-            allFilled
+          className={`hover-transition mt-4 w-full py-3.5 font-display text-lg tracking-wide ${allFilled
               ? "bg-jade text-ivory hover:bg-jade-deep active:scale-[0.98]"
               : "cursor-not-allowed bg-ink/10 text-ink/30"
-          }`}
+            }`}
         >
           Start session
         </button>

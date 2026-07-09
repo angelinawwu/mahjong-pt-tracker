@@ -36,10 +36,10 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
                 className="hover-transition flex items-center justify-between border px-4 py-3.5 border-ink/10 bg-white/60"
               >
                 <div className="flex items-center gap-3">
-                  <span className="font-display flex h-8 w-8 items-center justify-center text-sm bg-jade-soft text-jade">
+                  <span className="font-display flex h-8 w-8 items-center justify-center text-sm bg-jade/10 text-jade">
                     {entry.rank}
                   </span>
-                  <span className="text-sm font-medium text-ink">
+                  <span className="text-sm text-ink">
                     {entry.player.name}
                   </span>
                 </div>
@@ -61,13 +61,13 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
           <>
             <div className="hidden overflow-hidden border border-ink/10 md:block">
               <table className="w-full text-left text-sm">
-                <thead className="bg-jade-soft/60 text-ink/60">
+                <thead className="bg-jade/10 text-ink/60">
                   <tr>
-                    <th className="px-4 py-2 font-medium">#</th>
-                    <th className="px-4 py-2 font-medium">Winner</th>
-                    <th className="px-4 py-2 font-medium">Combo(s)</th>
-                    <th className="px-4 py-2 font-medium">Type</th>
-                    <th className="px-4 py-2 font-medium">Points</th>
+                    <th className="px-4 py-2">#</th>
+                    <th className="px-4 py-2">Winner</th>
+                    <th className="px-4 py-2">Combo(s)</th>
+                    <th className="px-4 py-2">Type</th>
+                    <th className="px-4 py-2">Points</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -76,7 +76,7 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
                       <td className="px-4 py-2 text-ink/60">
                         {round.roundNumber}
                       </td>
-                      <td className="px-4 py-2 font-medium text-ink">
+                      <td className="px-4 py-2 text-ink">
                         {playerName(session, round.winnerId)}
                       </td>
                       <td className="px-4 py-2 text-ink/70">
@@ -119,7 +119,7 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
                       {round.winType === "discard" ? "Discard" : "Self-draw"}
                     </span>
                   </div>
-                  <p className="mt-1 text-sm font-medium text-ink">
+                  <p className="mt-1 text-sm text-ink">
                     {playerName(session, round.winnerId)} won ·{" "}
                     {comboLabel(round.comboIds)}
                   </p>

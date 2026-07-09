@@ -23,11 +23,11 @@ export function PayoutPreview({ players, deltas, winnerId }: PayoutPreviewProps)
                 }`}
             >
               <span
-                className={`text-sm font-medium ${isWinner ? "text-jade" : "text-lacquer"}`}
+                className={`text-sm ${isWinner ? "text-jade" : "text-lacquer"}`}
               >
                 {player.name}
                 {isWinner && (
-                  <span className="ml-2 text-xs font-medium text-ink/40">
+                  <span className="ml-2 text-xs text-ink/40">
                     winner
                   </span>
                 )}
