@@ -100,7 +100,7 @@ export function PlayScreen() {
                 deltas={desktopPreviewDeltas}
                 winnerId={selection?.winnerId ?? null}
               />
-              {selection?.winnerId && (
+              {selection && selection.comboIds.length > 0 && (
                 <InteractiveHandPreview
                   comboIds={selection.comboIds}
                   winType={selection.winType}

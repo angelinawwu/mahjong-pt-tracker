@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { COMBOS } from "@/lib/combos";
+import { getComboAvailability } from "@/lib/handGenerator";
 import { calculateRoundPoints } from "@/lib/scoring";
 import { useSession } from "@/context/SessionContext";
 import type { WinType } from "@/lib/types";
@@ -55,6 +56,11 @@ export function LogRoundForm({
       COMBOS
     );
   }, [selection, session]);
+
+  const availability = useMemo(
+    () => getComboAvailability(selection.comboIds),
+    [selection.comboIds]
+  );
 
   if (!session) return null;
   const { players } = session;
@@ -166,14 +172,18 @@ export function LogRoundForm({
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {COMBOS.filter((c) => c.category === "hand" || !c.category).map((combo) => {
             const checked = selection.comboIds.includes(combo.id);
+            const disabled = !checked && (availability[combo.id]?.disabled ?? false);
             return (
               <button
                 type="button"
                 key={combo.id}
+                disabled={disabled}
                 onClick={() => toggleCombo(combo.id)}
-                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left active:scale-[0.98] ${checked
-                  ? "border-jade bg-jade/10"
-                  : "border-ink/10 bg-white hover:bg-jade/5"
+                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left ${disabled
+                  ? "cursor-not-allowed border-ink/5 bg-ink/[0.03] opacity-40"
+                  : checked
+                    ? "border-jade bg-jade/10 active:scale-[0.98]"
+                    : "border-ink/10 bg-white hover:bg-jade/5 active:scale-[0.98]"
                   }`}
               >
                 <span className="text-sm text-jade">
@@ -196,15 +206,23 @@ export function LogRoundForm({
           {COMBOS.filter((c) => c.category === "modifier").map((combo) => {
             const count = selection.comboIds.filter((id) => id === combo.id).length;
             const checked = count > 0;
+            const avail = availability[combo.id];
 
             if (combo.maxCount && combo.maxCount > 1) {
+              const effectiveMax = Math.min(combo.maxCount, avail?.maxCount ?? combo.maxCount);
+              const rowDisabled = !checked && effectiveMax === 0;
               return (
                 <div
                   key={combo.id}
-                  onClick={() => setComboCount(combo.id, checked ? count - 1 : 1)}
-                  className={`hover-transition flex cursor-pointer items-center justify-between border px-4 py-2 text-left active:scale-[0.98] ${checked
-                    ? "border-jade bg-jade/10"
-                    : "border-ink/10 bg-white hover:bg-jade/5"
+                  onClick={() => {
+                    if (rowDisabled) return;
+                    setComboCount(combo.id, checked ? count - 1 : 1);
+                  }}
+                  className={`hover-transition flex items-center justify-between border px-4 py-2 text-left ${rowDisabled
+                    ? "cursor-not-allowed border-ink/5 bg-ink/[0.03] opacity-40"
+                    : checked
+                      ? "cursor-pointer border-jade bg-jade/10 active:scale-[0.98]"
+                      : "cursor-pointer border-ink/10 bg-white hover:bg-jade/5 active:scale-[0.98]"
                     }`}
                 >
                   <span className="text-sm text-jade">
@@ -218,22 +236,24 @@ export function LogRoundForm({
                     <div className="flex items-center gap-1 border border-ink/0 bg-white p-1">
                       <button
                         type="button"
+                        disabled={rowDisabled || count === 0}
                         onClick={(e) => {
                           e.stopPropagation();
                           setComboCount(combo.id, Math.max(0, count - 1));
                         }}
-                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-[0.98]"
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-ink/5"
                       >
                         -
                       </button>
                       <span className="w-4 text-center text-sm text-jade">{count}</span>
                       <button
                         type="button"
+                        disabled={rowDisabled || count >= effectiveMax}
                         onClick={(e) => {
                           e.stopPropagation();
-                          setComboCount(combo.id, Math.min(combo.maxCount!, count + 1));
+                          setComboCount(combo.id, Math.min(effectiveMax, count + 1));
                         }}
-                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-[0.98]"
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-ink/5"
                       >
                         +
                       </button>
@@ -243,14 +263,18 @@ export function LogRoundForm({
               );
             }
 
+            const disabled = !checked && (avail?.disabled ?? false);
             return (
               <button
                 type="button"
                 key={combo.id}
+                disabled={disabled}
                 onClick={() => toggleCombo(combo.id)}
-                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left active:scale-[0.98] ${checked
-                  ? "border-jade bg-jade/10"
-                  : "border-ink/10 bg-white hover:bg-jade/5"
+                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left ${disabled
+                  ? "cursor-not-allowed border-ink/5 bg-ink/[0.03] opacity-40"
+                  : checked
+                    ? "border-jade bg-jade/10 active:scale-[0.98]"
+                    : "border-ink/10 bg-white hover:bg-jade/5 active:scale-[0.98]"
                   }`}
               >
                 <span className="text-sm text-jade">
@@ -394,7 +418,7 @@ export function LogRoundForm({
             deltas={previewDeltas}
             winnerId={selection.winnerId}
           />
-          {selection.winnerId && (
+          {selection.comboIds.length > 0 && (
             <InteractiveHandPreview
               comboIds={selection.comboIds}
               winType={selection.winType}
