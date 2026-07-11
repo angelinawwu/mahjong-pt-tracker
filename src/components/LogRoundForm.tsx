@@ -7,6 +7,7 @@ import { useSession } from "@/context/SessionContext";
 import type { WinType } from "@/lib/types";
 import { PlayerChip } from "./PlayerChip";
 import { PayoutPreview } from "./PayoutPreview";
+import { InteractiveHandPreview } from "./InteractiveHandPreview";
 
 export interface RoundSelection {
   winnerId: string | null;
@@ -170,7 +171,7 @@ export function LogRoundForm({
                 type="button"
                 key={combo.id}
                 onClick={() => toggleCombo(combo.id)}
-                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left active:scale-95 ${checked
+                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left active:scale-[0.98] ${checked
                   ? "border-jade bg-jade/10"
                   : "border-ink/10 bg-white hover:bg-jade/5"
                   }`}
@@ -201,7 +202,7 @@ export function LogRoundForm({
                 <div
                   key={combo.id}
                   onClick={() => setComboCount(combo.id, checked ? count - 1 : 1)}
-                  className={`hover-transition flex cursor-pointer items-center justify-between border px-4 py-2 text-left active:scale-95 ${checked
+                  className={`hover-transition flex cursor-pointer items-center justify-between border px-4 py-2 text-left active:scale-[0.98] ${checked
                     ? "border-jade bg-jade/10"
                     : "border-ink/10 bg-white hover:bg-jade/5"
                     }`}
@@ -221,7 +222,7 @@ export function LogRoundForm({
                           e.stopPropagation();
                           setComboCount(combo.id, Math.max(0, count - 1));
                         }}
-                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-95"
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-[0.98]"
                       >
                         -
                       </button>
@@ -232,7 +233,7 @@ export function LogRoundForm({
                           e.stopPropagation();
                           setComboCount(combo.id, Math.min(combo.maxCount!, count + 1));
                         }}
-                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-95"
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-[0.98]"
                       >
                         +
                       </button>
@@ -247,7 +248,7 @@ export function LogRoundForm({
                 type="button"
                 key={combo.id}
                 onClick={() => toggleCombo(combo.id)}
-                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left active:scale-95 ${checked
+                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left active:scale-[0.98] ${checked
                   ? "border-jade bg-jade/10"
                   : "border-ink/10 bg-white hover:bg-jade/5"
                   }`}
@@ -278,7 +279,7 @@ export function LogRoundForm({
                 <div
                   key={combo.id}
                   onClick={() => setComboCount(combo.id, checked ? count - 1 : 1)}
-                  className={`hover-transition flex cursor-pointer items-center justify-between border px-4 py-2 text-left active:scale-95 ${checked
+                  className={`hover-transition flex cursor-pointer items-center justify-between border px-4 py-2 text-left active:scale-[0.98] ${checked
                     ? "border-jade bg-jade/10"
                     : "border-ink/10 bg-white hover:bg-jade/5"
                     }`}
@@ -298,7 +299,7 @@ export function LogRoundForm({
                           e.stopPropagation();
                           setComboCount(combo.id, Math.max(0, count - 1));
                         }}
-                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-95"
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-[0.98]"
                       >
                         -
                       </button>
@@ -309,7 +310,7 @@ export function LogRoundForm({
                           e.stopPropagation();
                           setComboCount(combo.id, Math.min(combo.maxCount!, count + 1));
                         }}
-                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-95"
+                        className="flex h-6 w-6 items-center justify-center rounded bg-ink/5 text-base text-jade hover:bg-ink/10 active:scale-[0.98]"
                       >
                         +
                       </button>
@@ -324,7 +325,7 @@ export function LogRoundForm({
                 type="button"
                 key={combo.id}
                 onClick={() => toggleCombo(combo.id)}
-                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left active:scale-95 ${checked
+                className={`hover-transition flex items-center justify-between border px-4 py-3 text-left active:scale-[0.98] ${checked
                   ? "border-jade bg-jade/10"
                   : "border-ink/10 bg-white hover:bg-jade/5"
                   }`}
@@ -356,7 +357,7 @@ export function LogRoundForm({
               type="button"
               key={opt.key}
               onClick={() => setWinType(opt.key)}
-              className={`hover-transition border px-4 py-3 text-sm font-normal active:scale-95 ${selection.winType === opt.key
+              className={`hover-transition border px-4 py-3 text-sm font-normal active:scale-[0.98] ${selection.winType === opt.key
                 ? "border-jade bg-jade/10 text-jade"
                 : "border-ink/10 bg-white text-jade hover:bg-jade/5"
                 }`}
@@ -387,11 +388,19 @@ export function LogRoundForm({
 
       {/* --- Inline Payout Preview --- */}
       {showInlinePreview && (
-        <PayoutPreview
-          players={players}
-          deltas={previewDeltas}
-          winnerId={selection.winnerId}
-        />
+        <>
+          <PayoutPreview
+            players={players}
+            deltas={previewDeltas}
+            winnerId={selection.winnerId}
+          />
+          {selection.winnerId && (
+            <InteractiveHandPreview
+              comboIds={selection.comboIds}
+              winType={selection.winType}
+            />
+          )}
+        </>
       )}
 
       {/* --- Submit Action --- */}

@@ -7,6 +7,7 @@ import { calculateRoundPoints } from "@/lib/scoring";
 import { LogRoundForm, type RoundSelection } from "./LogRoundForm";
 import { PayoutPreview } from "./PayoutPreview";
 import { Scoreboard } from "./Scoreboard";
+import { InteractiveHandPreview } from "./InteractiveHandPreview";
 
 type ActiveTab = "log" | "scoreboard";
 
@@ -93,12 +94,18 @@ export function PlayScreen() {
                 onConfirmed={() => setActiveTab("scoreboard")}
               />
             </div>
-            <div className="sticky top-8 h-fit">
+            <div className="sticky top-8 h-fit flex flex-col gap-4">
               <PayoutPreview
                 players={session.players}
                 deltas={desktopPreviewDeltas}
                 winnerId={selection?.winnerId ?? null}
               />
+              {selection?.winnerId && (
+                <InteractiveHandPreview
+                  comboIds={selection.comboIds}
+                  winType={selection.winType}
+                />
+              )}
             </div>
           </div>
         </>
