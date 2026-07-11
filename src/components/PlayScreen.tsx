@@ -34,7 +34,7 @@ export function PlayScreen() {
   if (!session) return null;
 
   return (
-    <main className="mx-auto min-h-dvh w-full max-w-5xl px-4 pb-24 pt-8 md:px-8 md:pb-16">
+    <main className="mx-auto min-h-dvh w-full px-4 pb-24 pt-8 md:px-8 md:pb-16">
       <header className="mb-6 flex items-center justify-between">
         <div>
           <p className="text-xs font-medium tracking-[0.3em] text-lacquer uppercase">
@@ -110,7 +110,7 @@ export function PlayScreen() {
           </div>
         </>
       ) : (
-        <div className="max-w-3xl">
+        <div className="w-full">
           <Scoreboard session={session} />
         </div>
       )}

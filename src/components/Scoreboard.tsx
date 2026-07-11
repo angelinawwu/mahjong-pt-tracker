@@ -24,9 +24,9 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
   const rounds = [...session.rounds].reverse();
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-12">
       {/* --- Current Standings / Leaderboard --- */}
-      <section>
+      <section className="md:w-1/3 md:shrink-0 md:max-w-sm">
         <h2 className="font-display mb-4 text-lg text-jade">{title}</h2>
         <div className="flex flex-col gap-2">
           {standings.map((entry) => {
@@ -53,7 +53,7 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
       </section>
 
       {/* --- Round History Log --- */}
-      <section>
+      <section className="md:flex-1 md:min-w-0">
         <h3 className="font-display mb-3 text-lg text-jade">Round history</h3>
         {rounds.length === 0 ? (
           <p className="text-sm text-ink/40">No rounds logged yet.</p>
