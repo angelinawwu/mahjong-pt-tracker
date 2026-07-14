@@ -78,7 +78,16 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const currentPhrase = selectedPhrases[Math.min(Math.floor(step / 2), 2)];
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-sand">
+    <motion.div
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        duration: 0.5,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      }}
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-sand"
+    >
       <div
         className="flex items-center justify-center gap-2 sm:gap-4 h-48"
         style={{ perspective: "1000px" }}
@@ -130,6 +139,6 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           </AnimatePresence>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

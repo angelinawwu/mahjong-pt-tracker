@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import { SessionProvider, useSession } from "@/context/SessionContext";
 import { SessionSetup } from "@/components/SessionSetup";
 import { PlayScreen } from "@/components/PlayScreen";
@@ -19,14 +20,14 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <>
+    <AnimatePresence mode="wait">
       {isLoading ? (
-        <LoadingScreen onComplete={() => setIsLoading(false)} />
+        <LoadingScreen key="loading-screen" onComplete={() => setIsLoading(false)} />
       ) : (
-        <SessionProvider>
+        <SessionProvider key="app-shell">
           <AppShell />
         </SessionProvider>
       )}
-    </>
+    </AnimatePresence>
   );
 }
