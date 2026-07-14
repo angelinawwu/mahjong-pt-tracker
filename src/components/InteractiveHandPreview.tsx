@@ -72,22 +72,25 @@ export function InteractiveHandPreview({ comboIds, winType }: InteractiveHandPre
       </AnimatePresence>
 
       <AnimatePresence mode="wait">
-        {flowers.length > 0 && (
-          <motion.div
-            key={comboIdsString}
-            initial={{ opacity: 0, rotateX: -60, y: -20, filter: "blur(8px)" }}
-            animate={{ opacity: 1, rotateX: 0, y: 0, filter: "blur(0px)" }}
-            exit={{ opacity: 0, rotateX: 60, y: 20, filter: "blur(8px)" }}
-            transition={{
-              type: "spring",
-              stiffness: 120,
-              damping: 14,
-              opacity: { duration: 0.3 },
-              filter: { duration: 0.3 },
-            }}
-            className="w-full"
-            style={{ transformStyle: "preserve-3d" }}
-          >
+        <motion.div
+          key={comboIdsString}
+          initial={{ opacity: 0, rotateX: -60, y: -20, filter: "blur(8px)" }}
+          animate={{ opacity: 1, rotateX: 0, y: 0, filter: "blur(0px)" }}
+          exit={{ opacity: 0, rotateX: 60, y: 20, filter: "blur(8px)" }}
+          transition={{
+            type: "spring",
+            stiffness: 120,
+            damping: 14,
+            opacity: { duration: 0.3 },
+            filter: { duration: 0.3 },
+          }}
+          className="w-full"
+          style={{
+            transformStyle: "preserve-3d",
+            display: flowers.length > 0 ? "block" : "none"
+          }}
+        >
+          {flowers.length > 0 && (
             <div className="flex flex-col mt-4 gap-2 border-t border-ink/10 pt-3">
               <span className="text-[10px] sm:text-xs font-medium tracking-[0.2em] text-lacquer uppercase">Flowers</span>
               <div className="flex w-full items-end gap-[2px] sm:gap-1">
@@ -110,8 +113,8 @@ export function InteractiveHandPreview({ comboIds, winType }: InteractiveHandPre
                 )}
               </div>
             </div>
-          </motion.div>
-        )}
+          )}
+        </motion.div>
       </AnimatePresence>
     </div>
   );

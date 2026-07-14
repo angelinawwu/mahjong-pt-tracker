@@ -13,9 +13,11 @@ const LOADING_PHRASES = [
   "Washing the tiles...",
   "Building the wall...",
   "Rearranging tiles...",
-  "Checking for gongs...",
-  "Waiting on a single wait...",
   "Summoning thirteen orphans...",
+  "Waiting for the wind...",
+  "Dealing the hands...",
+  "Rolling the dice...",
+  "Sorting the tiles...",
 ];
 
 const textVariants = {
@@ -105,7 +107,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
       </div>
 
       <div className="flex flex-col items-center justify-center mt-8 text-center">
-        <p className="text-xs font-semibold tracking-[0.3em] text-lacquer uppercase mb-1.5">
+        <p className="text-xs font-semibold tracking-[0.3em] text-lacquer uppercase mb-2">
           Loading
         </p>
         <div className="h-8 flex items-center justify-center" style={{ perspective: "600px" }}>
