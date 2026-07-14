@@ -20,10 +20,13 @@ export default function Home() {
 
   return (
     <>
-      {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
-      <SessionProvider>
-        <AppShell />
-      </SessionProvider>
+      {isLoading ? (
+        <LoadingScreen onComplete={() => setIsLoading(false)} />
+      ) : (
+        <SessionProvider>
+          <AppShell />
+        </SessionProvider>
+      )}
     </>
   );
 }
