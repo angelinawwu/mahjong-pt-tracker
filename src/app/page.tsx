@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { SessionProvider, useSession } from "@/context/SessionContext";
 import { SessionSetup } from "@/components/SessionSetup";
 import { PlayScreen } from "@/components/PlayScreen";
 import { SessionSummary } from "@/components/SessionSummary";
+import { LoadingScreen } from "@/components/LoadingScreen";
 
 function AppShell() {
   const { session } = useSession();
@@ -14,9 +16,14 @@ function AppShell() {
 }
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
-    <SessionProvider>
-      <AppShell />
-    </SessionProvider>
+    <>
+      {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+      <SessionProvider>
+        <AppShell />
+      </SessionProvider>
+    </>
   );
 }
