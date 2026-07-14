@@ -36,7 +36,7 @@ export function InteractiveHandPreview({ comboIds, winType }: InteractiveHandPre
   return (
     <div className="w-full flex flex-col gap-4 border border-ink/10 bg-white/70 p-[21px] overflow-hidden" style={{ perspective: "1000px" }}>
       <p className="font-display text-lg text-jade">Hand preview</p>
-      
+
       <AnimatePresence mode="wait">
         <motion.div
           key={comboIdsString}
@@ -69,7 +69,7 @@ export function InteractiveHandPreview({ comboIds, winType }: InteractiveHandPre
           </div>
 
           {flowers.length > 0 && (
-            <div className="flex flex-col gap-2 border-t border-ink/10 pt-3">
+            <div className="flex flex-col mt-4 gap-2 border-t border-ink/10 pt-3">
               <span className="text-[10px] sm:text-xs font-medium tracking-[0.2em] text-lacquer uppercase">Flowers</span>
               <div className="flex w-full items-end gap-[2px] sm:gap-1">
                 {Array.from({ length: mainTiles.length }).map((_, i) => {

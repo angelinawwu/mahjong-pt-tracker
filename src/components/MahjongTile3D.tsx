@@ -22,7 +22,7 @@ export function MahjongTile3D({ tile, className, ...props }: MahjongTile3DProps)
         >
           {/* Shadow */}
           <div
-            className="absolute inset-0 bg-black/30 blur-[8px] rounded-[6px]"
+            className="absolute inset-0 bg-black/15 blur-[8px] rounded-[6px]"
             style={{ transform: "translateZ(-25cqi) translateY(10cqi) translateX(-5cqi) scale(0.95)" }}
           />
 
@@ -46,8 +46,8 @@ export function MahjongTile3D({ tile, className, ...props }: MahjongTile3DProps)
             className="absolute inset-0 rounded-[6px]"
             style={{
               transform: "rotateY(180deg) translateZ(33.33cqi)",
-              background: "linear-gradient(135deg, var(--jade), #1a5235)",
-              boxShadow: "inset 0 0 10px rgba(0,0,0,0.5)"
+              background: "linear-gradient(135deg, var(--jade), rgba(0,0,0,0.2))",
+              boxShadow: "inset 0 0 10px rgba(0,0,0,0.3)"
             }}
           />
 
@@ -59,7 +59,7 @@ export function MahjongTile3D({ tile, className, ...props }: MahjongTile3DProps)
               height: "100%",
               marginLeft: "-33.33cqi",
               transform: "rotateY(-90deg) translateZ(50cqi)",
-              background: "linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(0,0,0,0.3)), linear-gradient(to right, var(--jade) 50%, #f0f0f0 50%)",
+              background: "linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(0,0,0,0.15)), linear-gradient(to right, var(--jade) 50%, #f0f0f0 50%)",
             }}
           />
 
@@ -71,7 +71,7 @@ export function MahjongTile3D({ tile, className, ...props }: MahjongTile3DProps)
               height: "100%",
               marginLeft: "-33.33cqi",
               transform: "rotateY(90deg) translateZ(50cqi)",
-              background: "linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(0,0,0,0.4)), linear-gradient(to right, #f0f0f0 50%, var(--jade) 50%)",
+              background: "linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(0,0,0,0.2)), linear-gradient(to right, #f0f0f0 50%, var(--jade) 50%)",
             }}
           />
 
@@ -95,7 +95,7 @@ export function MahjongTile3D({ tile, className, ...props }: MahjongTile3DProps)
               height: "66.66cqi",
               marginTop: "-33.33cqi",
               transform: "rotateX(-90deg) translateZ(66.66cqi)",
-              background: "linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.4)), linear-gradient(to bottom, #d0d0d0 50%, var(--jade) 50%)",
+              background: "linear-gradient(to right, rgba(0,0,0,0.3), rgba(0,0,0,0.2)), linear-gradient(to bottom, #d0d0d0 50%, var(--jade) 50%)",
             }}
           />
         </div>
