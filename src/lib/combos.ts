@@ -5,11 +5,11 @@ import type { Combo } from "./types";
 // by the user and updated once known.
 export const COMBOS: Combo[] = [
   { id: "none", name: "None", chineseName: "无", value: 0, category: "hand" },
-  { id: "chi-chi-chi", name: "Chi Chi Hu", chineseName: "吃吃胡", value: 1, category: "hand" },
+  { id: "chi-chi-chi", name: "Chi chi hu", chineseName: "吃吃胡", value: 1, category: "hand" },
   // Guessed value — confirm with user.
-  { id: "perfect-chi-chi-chi", name: "Ping Hu", chineseName: "平胡", value: 3, category: "hand" },
+  { id: "perfect-chi-chi-chi", name: "Ping hu", chineseName: "平胡", value: 3, category: "hand" },
   // Guessed value — confirm with user.
-  { id: "all-triplets", name: "Peng Peng Hu", chineseName: "碰碰胡", value: 3, category: "hand" },
+  { id: "all-triplets", name: "Peng peng hu", chineseName: "碰碰胡", value: 3, category: "hand" },
   // Guessed value — confirm with user.
   { id: "dragon", name: "Dragon", chineseName: "一条龙", value: 3, category: "hand" },
   // Guessed value — confirm with user.

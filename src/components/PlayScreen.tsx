@@ -54,7 +54,19 @@ export function PlayScreen() {
       </header>
 
       {/* Tabs */}
-      <div className="mb-6 flex rounded-full bg-white/60 w-full md:max-w-sm">
+      <div className="relative mb-6 flex bg-white/60 w-full md:max-w-sm border border-ink/10">
+        {/* Middle divider */}
+        <div className="absolute top-0 bottom-0 left-1/2 w-[1px] bg-ink/10 pointer-events-none z-0" />
+
+        {/* Sliding background indicator */}
+        <div
+          className="absolute top-[-1px] bottom-[-1px] bg-jade border border-jade z-10 transition-all duration-300 ease-out"
+          style={{
+            left: activeTab === "log" ? "-1px" : "50%",
+            width: "calc(50% + 1px)",
+          }}
+        />
+
         {(
           [
             { key: "log", label: "Log round" },
@@ -65,10 +77,11 @@ export function PlayScreen() {
             key={tab.key}
             type="button"
             onClick={() => setActiveTab(tab.key)}
-            className={`hover-transition flex-1 border py-2 text-sm font-normal ${activeTab === tab.key
-              ? "border-jade bg-jade text-ivory"
-              : "border-ink/10 text-ink/60"
-              }`}
+            className={`relative z-20 flex-1 py-2 text-sm font-normal text-center transition-colors duration-300 ${
+              activeTab === tab.key
+                ? "text-ivory"
+                : "text-ink/60 hover:text-ink/80"
+            }`}
           >
             {tab.label}
           </button>
