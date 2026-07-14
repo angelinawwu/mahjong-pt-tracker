@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "Mahjong Points",
   description: "A simple in-session mahjong scoring tracker.",
   icons: {
-    icon: "/favicon.png",
+    icon: "/favicon.webp",
   },
 };
 

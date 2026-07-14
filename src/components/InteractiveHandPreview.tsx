@@ -38,7 +38,7 @@ export function InteractiveHandPreview({ comboIds, winType }: InteractiveHandPre
         {mainTiles.map((tile, i) => (
           <div key={`${tile}-${i}`} className="flex-1 min-w-0">
             <img
-              src={`/tiles/${tile}.png`}
+              src={`/tiles/${tile}.webp`}
               alt={tile}
               className="w-full aspect-[3/4] object-fill drop-shadow-sm rounded-[2px]"
             />
@@ -49,7 +49,7 @@ export function InteractiveHandPreview({ comboIds, winType }: InteractiveHandPre
             <div className="w-px self-stretch border-l-2 border-jade/20 ml-1 sm:ml-3"></div>
             <div className="flex-1 min-w-0 ml-1 sm:ml-3">
               <img
-                src={`/tiles/${winningTile}.png`}
+                src={`/tiles/${winningTile}.webp`}
                 alt={winningTile}
                 className="w-full aspect-[3/4] object-fill drop-shadow-sm rounded-[2px]"
               />
@@ -68,7 +68,7 @@ export function InteractiveHandPreview({ comboIds, winType }: InteractiveHandPre
                 <div key={`flower-${i}`} className="flex-1 min-w-0">
                   {f && (
                     <img
-                      src={`/tiles/${f}.png`}
+                      src={`/tiles/${f}.webp`}
                       alt={f}
                       className="w-full aspect-[3/4] object-fill drop-shadow-sm rounded-[2px] opacity-90"
                     />
