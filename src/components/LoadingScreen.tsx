@@ -52,8 +52,9 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
     // 5: [3, 4, 5] (Ends here with 3 tiles visible)
 
     if (step >= 5) {
-      // Keep tiles 3, 4, and 5 visible, wait for the final tile transition to finish, then complete.
-      const timeout = setTimeout(onComplete, 1200);
+      // Keep tiles 3, 4, and 5 visible, then complete slightly before the final
+      // tile transition settles so the fade overlaps the tail of the animation.
+      const timeout = setTimeout(onComplete, 700);
       return () => clearTimeout(timeout);
     }
 
@@ -82,7 +83,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{
-        duration: 0.5,
+        duration: 0.3,
         ease: [0.25, 0.46, 0.45, 0.94],
       }}
       className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-sand"
@@ -96,14 +97,15 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
             <motion.div
               key={`${tile}-${index}`}
               layout
-              initial={{ opacity: 0, rotateX: 70, y: 50 }}
-              animate={{ opacity: 1, rotateX: 0, y: 0 }}
-              exit={{ opacity: 0, rotateX: -70, y: -50 }}
+              initial={{ opacity: 0, rotateX: 70, y: 50, filter: "blur(16px)" }}
+              animate={{ opacity: 1, rotateX: 0, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, rotateX: -70, y: -50, filter: "blur(16px)" }}
               transition={{
                 type: "spring",
                 stiffness: 120,
                 damping: 14,
                 opacity: { duration: 0.3 },
+                filter: { duration: 0.3 },
               }}
               className="w-16 sm:w-24"
               style={{ transformStyle: "preserve-3d" }}
