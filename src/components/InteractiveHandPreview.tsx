@@ -11,6 +11,40 @@ interface InteractiveHandPreviewProps {
   winType: WinType;
 }
 
+const tileContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.035, delayChildren: 0.05 },
+  },
+  exit: {
+    transition: { staggerChildren: 0.02 },
+  },
+};
+
+const tileItemVariants = {
+  hidden: { opacity: 0, rotateX: -60, y: -20, filter: "blur(8px)" },
+  visible: {
+    opacity: 1,
+    rotateX: 0,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      type: "spring" as const,
+      stiffness: 120,
+      damping: 14,
+      opacity: { duration: 0.3 },
+      filter: { duration: 0.3 },
+    },
+  },
+  exit: {
+    opacity: 0,
+    rotateX: 60,
+    y: 20,
+    filter: "blur(8px)",
+    transition: { duration: 0.3 },
+  },
+};
+
 export function InteractiveHandPreview({ comboIds, winType }: InteractiveHandPreviewProps) {
   // Use state to store the generated hand to avoid hydration mismatch 
   // if we used Math.random() directly on the first render.
@@ -40,31 +74,25 @@ export function InteractiveHandPreview({ comboIds, winType }: InteractiveHandPre
       <AnimatePresence mode="wait">
         <motion.div
           key={comboIdsString}
-          initial={{ opacity: 0, rotateX: -60, y: -20, filter: "blur(8px)" }}
-          animate={{ opacity: 1, rotateX: 0, y: 0, filter: "blur(0px)" }}
-          exit={{ opacity: 0, rotateX: 60, y: 20, filter: "blur(8px)" }}
-          transition={{
-            type: "spring",
-            stiffness: 120,
-            damping: 14,
-            opacity: { duration: 0.3 },
-            filter: { duration: 0.3 },
-          }}
+          variants={tileContainerVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
           className="w-full"
           style={{ transformStyle: "preserve-3d" }}
         >
           <div className="flex w-full items-end gap-[2px] sm:gap-1 mb-2">
             {mainTiles.map((tile, i) => (
-              <div key={`${tile}-${i}`} className="flex-1 min-w-0">
+              <motion.div key={`${tile}-${i}`} variants={tileItemVariants} className="flex-1 min-w-0">
                 <MahjongTile3D tile={tile} />
-              </div>
+              </motion.div>
             ))}
             {winningTile && (
               <>
                 <div className="w-px self-stretch border-l-2 border-jade/20 ml-1 sm:ml-3"></div>
-                <div className="flex-1 min-w-0 ml-1 sm:ml-3">
+                <motion.div variants={tileItemVariants} className="flex-1 min-w-0 ml-1 sm:ml-3">
                   <MahjongTile3D tile={winningTile} />
-                </div>
+                </motion.div>
               </>
             )}
           </div>
@@ -74,16 +102,10 @@ export function InteractiveHandPreview({ comboIds, winType }: InteractiveHandPre
       <AnimatePresence mode="wait">
         <motion.div
           key={comboIdsString}
-          initial={{ opacity: 0, rotateX: -60, y: -20, filter: "blur(8px)" }}
-          animate={{ opacity: 1, rotateX: 0, y: 0, filter: "blur(0px)" }}
-          exit={{ opacity: 0, rotateX: 60, y: 20, filter: "blur(8px)" }}
-          transition={{
-            type: "spring",
-            stiffness: 120,
-            damping: 14,
-            opacity: { duration: 0.3 },
-            filter: { duration: 0.3 },
-          }}
+          variants={tileContainerVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
           className="w-full"
           style={{
             transformStyle: "preserve-3d",
@@ -97,11 +119,11 @@ export function InteractiveHandPreview({ comboIds, winType }: InteractiveHandPre
                 {Array.from({ length: mainTiles.length }).map((_, i) => {
                   const f = flowers[i];
                   return (
-                    <div key={`flower-${i}`} className="flex-1 min-w-0">
+                    <motion.div key={`flower-${i}`} variants={tileItemVariants} className="flex-1 min-w-0">
                       {f && (
                         <MahjongTile3D tile={f} className="opacity-90" />
                       )}
-                    </div>
+                    </motion.div>
                   );
                 })}
                 {/* Match winning tile spacing so the flowers align perfectly with the hand tiles */}

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MahjongTile3D } from "./MahjongTile3D";
-import { generateHandTiles } from "@/lib/handGenerator";
+import { generateRandomLandingTiles } from "@/lib/handGenerator";
 
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -32,9 +32,8 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    // Generate a random hand and pick first 6 tiles for the loading animation
-    const { hand } = generateHandTiles([]);
-    setTiles(hand.slice(0, 6));
+    // Pick 6 completely random tiles for the loading animation
+    setTiles(generateRandomLandingTiles(6));
 
     // Choose 3 random phrases from the list
     const shuffled = [...LOADING_PHRASES].sort(() => 0.5 - Math.random());

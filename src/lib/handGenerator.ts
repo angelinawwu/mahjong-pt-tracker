@@ -372,6 +372,18 @@ function generateStandardHand(counts: Record<string, number>): string[] {
   ];
 }
 
+function allTileIds(): string[] {
+  return [
+    ...SUITS.flatMap((suit) => suitTiles(suit)),
+    ...WINDS,
+    ...DRAGONS,
+  ];
+}
+
+export function generateRandomLandingTiles(count: number): string[] {
+  return randomItems(allTileIds(), count);
+}
+
 export function generateHandTiles(comboIds: string[]): { hand: string[], flowers: string[] } {
   const counts = countIds(comboIds);
 
