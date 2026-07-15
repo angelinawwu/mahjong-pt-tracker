@@ -23,6 +23,8 @@ interface SessionContextValue {
   session: Session | null;
   startSession: (names: [string, string, string, string]) => void;
   logRound: (input: LogRoundInput) => void;
+  updateRound: (roundId: string, input: LogRoundInput) => void;
+  deleteRound: (roundId: string) => void;
   endSession: () => void;
   resetSession: () => void;
 }
@@ -73,6 +75,45 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const updateRound = useCallback((roundId: string, input: LogRoundInput) => {
+    setSession((prev) => {
+      if (!prev) return prev;
+      const allPlayerIds = prev.players.map((p) => p.id);
+      const pointDeltas = calculateRoundPoints(
+        input.winnerId,
+        input.comboIds,
+        input.winType,
+        input.discarderId,
+        allPlayerIds,
+        COMBOS
+      );
+      const rounds = prev.rounds.map((round) =>
+        round.id === roundId
+          ? {
+              ...round,
+              winnerId: input.winnerId,
+              comboIds: input.comboIds,
+              winType: input.winType,
+              discarderId:
+                input.winType === "discard" ? input.discarderId : undefined,
+              pointDeltas,
+            }
+          : round
+      );
+      return { ...prev, rounds };
+    });
+  }, []);
+
+  const deleteRound = useCallback((roundId: string) => {
+    setSession((prev) => {
+      if (!prev) return prev;
+      const rounds = prev.rounds
+        .filter((round) => round.id !== roundId)
+        .map((round, index) => ({ ...round, roundNumber: index + 1 }));
+      return { ...prev, rounds };
+    });
+  }, []);
+
   const endSession = useCallback(() => {
     setSession((prev) => (prev ? { ...prev, status: "ended" } : prev));
   }, []);
@@ -82,8 +123,16 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ session, startSession, logRound, endSession, resetSession }),
-    [session, startSession, logRound, endSession, resetSession]
+    () => ({
+      session,
+      startSession,
+      logRound,
+      updateRound,
+      deleteRound,
+      endSession,
+      resetSession,
+    }),
+    [session, startSession, logRound, updateRound, deleteRound, endSession, resetSession]
   );
 
   return (

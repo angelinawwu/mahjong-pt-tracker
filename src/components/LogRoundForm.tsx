@@ -5,7 +5,7 @@ import { COMBOS } from "@/lib/combos";
 import { getComboAvailability } from "@/lib/handGenerator";
 import { calculateRoundPoints } from "@/lib/scoring";
 import { useSession } from "@/context/SessionContext";
-import type { WinType } from "@/lib/types";
+import type { Round, WinType } from "@/lib/types";
 import { PlayerChip } from "./PlayerChip";
 import { PayoutPreview } from "./PayoutPreview";
 import { InteractiveHandPreview } from "./InteractiveHandPreview";
@@ -27,16 +27,31 @@ const EMPTY_SELECTION: RoundSelection = {
 interface LogRoundFormProps {
   onSelectionChange?: (selection: RoundSelection) => void;
   onConfirmed?: () => void;
+  onCancel?: () => void;
   showInlinePreview?: boolean;
+  editingRound?: Round;
+}
+
+function roundToSelection(round: Round): RoundSelection {
+  return {
+    winnerId: round.winnerId,
+    comboIds: round.comboIds,
+    winType: round.winType,
+    discarderId: round.discarderId ?? null,
+  };
 }
 
 export function LogRoundForm({
   onSelectionChange,
   onConfirmed,
+  onCancel,
   showInlinePreview = false,
+  editingRound,
 }: LogRoundFormProps) {
-  const { session, logRound } = useSession();
-  const [selection, setSelection] = useState<RoundSelection>(EMPTY_SELECTION);
+  const { session, logRound, updateRound } = useSession();
+  const [selection, setSelection] = useState<RoundSelection>(
+    editingRound ? roundToSelection(editingRound) : EMPTY_SELECTION
+  );
 
   useEffect(() => {
     onSelectionChange?.(selection);
@@ -137,13 +152,18 @@ export function LogRoundForm({
 
   function handleConfirm() {
     if (!isValid || !selection.winnerId) return;
-    logRound({
+    const input = {
       winnerId: selection.winnerId,
       comboIds: selection.comboIds,
       winType: selection.winType,
       discarderId: selection.discarderId ?? undefined,
-    });
-    setSelection(EMPTY_SELECTION);
+    };
+    if (editingRound) {
+      updateRound(editingRound.id, input);
+    } else {
+      logRound(input);
+      setSelection(EMPTY_SELECTION);
+    }
     onConfirmed?.();
   }
 
@@ -428,17 +448,28 @@ export function LogRoundForm({
       )}
 
       {/* --- Submit Action --- */}
-      <button
-        type="button"
-        disabled={!isValid}
-        onClick={handleConfirm}
-        className={`hover-transition w-full py-4 font-display text-lg tracking-wide ${isValid
-          ? "bg-jade text-ivory hover:bg-jade-deep active:scale-[0.98]"
-          : "cursor-not-allowed bg-[#DADADA] text-ink/30"
-          }`}
-      >
-        Confirm round
-      </button>
+      <div className="flex gap-3">
+        {editingRound && (
+          <button
+            type="button"
+            onClick={onCancel}
+            className="hover-transition flex-1 border border-ink/10 bg-white py-4 font-display text-lg tracking-wide text-ink/60 hover:bg-ink/5 active:scale-[0.98]"
+          >
+            Cancel
+          </button>
+        )}
+        <button
+          type="button"
+          disabled={!isValid}
+          onClick={handleConfirm}
+          className={`hover-transition flex-1 py-4 font-display text-lg tracking-wide ${isValid
+            ? "bg-jade text-ivory hover:bg-jade-deep active:scale-[0.98]"
+            : "cursor-not-allowed bg-[#DADADA] text-ink/30"
+            }`}
+        >
+          {editingRound ? "Save changes" : "Confirm round"}
+        </button>
+      </div>
     </div>
   );
 }
