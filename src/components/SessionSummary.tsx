@@ -19,7 +19,7 @@ export function SessionSummary() {
         <h1 className="font-display text-4xl text-jade">Final standings</h1>
         {winner && (
           <p className="mt-3 text-sm text-ink/60">
-            <span className="font-semibold text-jade">{winner.player.name}</span>{" "}
+            <span className="text-jade">{winner.player.name}</span>{" "}
             takes the table with {winner.total} points.
           </p>
         )}
@@ -36,7 +36,7 @@ export function SessionSummary() {
                 <span className="font-display flex h-9 w-9 items-center justify-center rounded-full bg-jade/10 text-jade">
                   {entry.rank}
                 </span>
-                <span className="font-medium text-ink">
+                <span className="text-sm text-ink">
                   {entry.player.name}
                 </span>
               </div>

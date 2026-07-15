@@ -53,7 +53,7 @@ export function SessionSetup() {
               onChange={(e) => updateName(i, e.target.value)}
               placeholder={`Player ${i + 1}`}
               maxLength={24}
-              className="hover-transition w-full border border-jade/20 bg-white/70 py-3.5 pr-4 pl-10 text-ink placeholder:text-ink/30 focus:border-jade focus:ring-2 focus:ring-jade/20 focus:outline-none"
+              className="hover-transition w-full border border-jade/20 bg-white/70 text-sm py-3.5 pr-4 pl-10 text-ink placeholder:text-ink/30 focus:border-jade focus:ring-2 focus:ring-jade/20 focus:outline-none"
             />
           </div>
         ))}
