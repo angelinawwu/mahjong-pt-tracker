@@ -9,8 +9,8 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Mahjong Points",
-  description: "A simple in-session mahjong scoring tracker.",
+  title: "mahjong pt tracker",
+  description: "house rules only btw",
   icons: {
     icon: "/favicon.webp",
   },
