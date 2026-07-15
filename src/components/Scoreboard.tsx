@@ -40,7 +40,7 @@ export function Scoreboard({ session, title = "Scoreboard" }: ScoreboardProps) {
     <>
     {editingRound && (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 px-4 py-8">
-        <div className="max-h-full w-full max-w-lg overflow-y-auto bg-ivory p-6 shadow-xl">
+        <div className="max-h-full w-full max-w-lg overflow-y-auto bg-background p-6 shadow-xl">
           <h3 className="font-display mb-4 text-lg text-jade">
             Edit round {editingRound.roundNumber}
           </h3>
