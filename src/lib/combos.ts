@@ -17,7 +17,7 @@ export const COMBOS: Combo[] = [
   // Guessed value — confirm with user.
   { id: "thirteen-orphans", name: "Thirteen orphans", chineseName: "十三不搭", value: 3, category: "hand" },
   // Guessed value — confirm with user.
-  { id: "all-symbols", name: "All symbols", chineseName: "字一色", value: 3, category: "hand" },
+  { id: "all-symbols", name: "All symbols", chineseName: "字一色", value: 5, category: "hand" },
   // Guessed value — confirm with user.
   { id: "wind-triplet", name: "Wind triplet", chineseName: "门风刻", value: 1, category: "modifier", maxCount: 2 },
   // Guessed value — confirm with user.
